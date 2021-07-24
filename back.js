@@ -1,7 +1,5 @@
 const express = require('express');
 
-const cors = require("cors")
-
 const  { Pool }  = require("pg")
 
 const morgan = require("morgan")
@@ -17,8 +15,6 @@ const pool = new Pool({
 const app = express();
 
 app.listen(3000);
-
-app.use(cors());
 
 app.use(express.json());
 
