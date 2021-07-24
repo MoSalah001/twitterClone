@@ -14,8 +14,8 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "nodemon /public/js/back.js",
-    "start":"/public/js/back.js"
+    "test": "nodemon back.js",
+    "start":"node ../public/js/back.js"
   },
   "author": "MoSalah",
   "license": "ISC"
