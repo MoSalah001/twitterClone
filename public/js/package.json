@@ -7,6 +7,7 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
     "pg": "^8.6.0"
   },
   "devDependencies": {
@@ -14,7 +15,8 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "nodemon back.js"
+    "test": "nodemon back.js",
+    "start": "node back.js"
   },
   "author": "MoSalah",
   "license": "ISC"

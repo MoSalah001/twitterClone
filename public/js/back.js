@@ -8,10 +8,10 @@ const morgan = require("morgan")
 
 const pool = new Pool({
   user:"postgres",
-  password:"MoSalah@864722",
-  host:"localhost",
-  port:2020,
-  database:"TwitterClone"
+  password:"Master@864722@",
+  host:"db.rwcskqzxmqcotrbcilsz.supabase.co",
+  port:6543,
+  database:"postgres"
 });
 
 const app = express();
@@ -24,6 +24,7 @@ app.use(express.json());
 
 app.post('/feed',(req,res)=>{
   let id = req.body.id;
+  console.log(id);
   pool.connect();
   pool.query('SELECT * FROM tweets WHERE user_id = $1',[id],(err,result)=>{
     if(err) {
@@ -40,7 +41,7 @@ app.post('/feed',(req,res)=>{
 
 app.post('/user',(req,res) =>{
   let id = req.body.id
-  let loc = "http://localhost:5500/login.html";
+  let loc = "http://localhost:5500/main.html";
   pool.connect()
   pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
     if(result !== undefined){
@@ -61,7 +62,7 @@ app.post('/mew',(req,res)=>{
     if(err) {res.send(err);}
     else {
       if(result.rows[0] !== undefined) {           
-        let refresh = req.headers.origin+'/index.html';
+        let refresh = req.headers.origin+'/main.html';
         res.redirect(refresh)
           }
       }
@@ -72,7 +73,7 @@ app.post('/mew',(req,res)=>{
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
   let pass = req.body.pass;
-  let loc = "http://localhost:5500/index.html";
+  let loc = "http://localhost:5500/main.html";
   pool.connect()
   pool.query('SELECT * FROM users WHERE uname = $1 AND pass =$2',[uname, pass],(err, result)=> {
   if (err) {
@@ -80,7 +81,8 @@ app.post("/login",(req,res)=>{
   } else {
     if(result.rows[0] !== undefined){
   let url = loc+'?'+result.rows[0].user_id;
-  res.redirect(url)
+  res.write((result.rows[0].user_id))
+  res.send()
     }else {
       res.status(404).send("wrong username or password please try again or create an account")
     }
@@ -93,7 +95,7 @@ app.post('/reg',(req,res)=>{
   let pass = req.body.pass;
   let mail = req.body.mail;
   console.log(mail);
-  let loc = "http://localhost:5500/index.html";
+  let loc = "http://localhost:5500/main.html";
   pool.connect()
   pool.query('INSERT INTO users(uname,pass,email) VALUES ($1, $2, $3) RETURNING *',[uname, pass, mail],(err, result)=> {
   if (err) {
@@ -116,4 +118,11 @@ app.put("/data",(req,res)=>{
       res.send(ressult.rows)
     }
   })
+})
+
+app.post("/getID",(req,res)=>{
+  let id = req.body;
+  let url = "http://localhost:5500/main.html?"
+  res.write(url+id.id)
+  res.send()
 })

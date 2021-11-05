@@ -8,23 +8,27 @@ const un_get = new XMLHttpRequest()
 
 const feeding = new XMLHttpRequest();
 
-let un_url = document.URL
+let id = window.location.search
 
-let i =un_url.search("html")
-i ={
-    id:un_url.slice(i+5)
+window.localStorage.setItem("id",id.split('?').slice(1))
+
+const uid = {
+    id:window.localStorage.getItem('id')
 }
+
 un_get.open('POST','http://localhost:3000/user')
 un_get.setRequestHeader('content-type','application/json')
-un_get.send(JSON.stringify(i));
+un_get.send(JSON.stringify(uid));
 un_get.onreadystatechange = ()=>{
     if(un_get.readyState == 4 && un_get.status == 200) {
         let str = JSON.parse(un_get.response)
+        console.log(un_get.response);
         username.textContent = `Hello, ${str}`
-    }else if(i.id < 1){
+    }else if( uid.id < 1){
         window.location = un_get.responseURL
     }
 }
+
 const http = new XMLHttpRequest()
 
 const feed = document.getElementById('tweets')
@@ -35,7 +39,7 @@ submit.addEventListener('click', send)
 function send() {
     let tweeting = {
         body : tweet.value,
-        user : i,
+        user : uid,
     }
     
     http.open('POST','http://localhost:3000/mew',true)
@@ -47,7 +51,7 @@ function send() {
     
     http.onreadystatechange = ()=>{
         if(http.readyState == 4 && http.status == 200){
-            window.location=http.responseURL+`?${i.id}`;
+            window.location=http.responseURL+`?${uid.id}`;
         }
     }
 }
@@ -55,7 +59,7 @@ function send() {
 
 feeding.open("POST","http://localhost:3000/feed");
 feeding.setRequestHeader('content-type','application/json')
-feeding.send(JSON.stringify(i))
+feeding.send(JSON.stringify(uid))
 feeding.onreadystatechange=()=>{
     if(feeding.readyState == 4 && feeding.status == 200) {
         let tweets = JSON.parse(feeding.responseText);

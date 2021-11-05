@@ -15,7 +15,16 @@ function sending(e){
         http.send(JSON.stringify(login));
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                window.location = this.responseURL
+                let uid = {id:this.response}
+                console.log(uid);
+                http.open("post","http://localhost:3000/getID")
+                http.setRequestHeader('content-type','application/json')
+                http.send(JSON.stringify(uid))
+                http.onreadystatechange = ()=>{
+                    if(this.readyState == 4 && this.status == 200) {
+                        window.location= this.response
+                    }
+                }
             } else {
                 document.getElementById('err').innerText = this.response
             }
