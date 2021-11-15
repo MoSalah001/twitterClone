@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "nodemon back.js",
-    "start": "node back.js"
+    "start": "node login.mjs"
   },
   "author": "MoSalah",
   "license": "ISC"
