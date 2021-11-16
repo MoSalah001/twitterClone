@@ -9,15 +9,19 @@
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "webpack": "^5.64.1"
   },
   "devDependencies": {
     "cors": "^2.8.5",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0"
   },
   "scripts": {
     "test": "nodemon back.js",
-    "start": "node back.js"
+    "start": "node back.js",
+    "serve": "webpack serve"
   },
   "author": "MoSalah",
   "license": "ISC"
