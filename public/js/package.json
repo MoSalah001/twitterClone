@@ -8,20 +8,17 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
-    "mysql": "^2.18.1",
     "pg": "^8.6.0",
-    "webpack": "^5.64.1"
+    "webpack": "^5.64.1",
+    "websocket": "^1.0.34"
   },
   "devDependencies": {
     "cors": "^2.8.5",
-    "nodemon": "^2.0.7",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.5.0"
+    "nodemon": "^2.0.7"
   },
   "scripts": {
     "test": "nodemon back.js",
-    "start": "node back.js",
-    "serve": "webpack serve"
+    "start": "node back.js"
   },
   "author": "MoSalah",
   "license": "ISC"
