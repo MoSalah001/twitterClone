@@ -1,0 +1,1 @@
+web: node ./public/js/back.js
