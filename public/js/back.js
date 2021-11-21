@@ -6,6 +6,12 @@ const bcrypt = require("bcrypt")
 
 const saltRounds = 10
 
+var serverHost = process.env.HOST || '0.0.0.0'
+
+var serverPort = process.env.PORT || 5000
+
+let loc = serverHost+serverPort
+
 const pool = new Pool({
   user:"postgres",
   password:"Master@864722@",
@@ -16,7 +22,9 @@ const pool = new Pool({
 
 const app = express();
 
-app.listen(process.env.PORT || 3000);
+app.listen(serverPort,serverHost,function(){
+  console.log("listening on port %d",serverPort);
+});
 
 app.use(express.json());
 
@@ -39,7 +47,7 @@ app.post('/feed',(req,res)=>{
 
 app.post('/user',(req,res) =>{
   let id = req.body.id
-  let loc = "http://localhost:5500/main.html";
+  loc+"/main.html";
   console.log(id);
   pool.connect()
   pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
@@ -72,7 +80,7 @@ app.post('/mew',(req,res)=>{
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
-  let loc = "http://localhost:5500/main.html";
+  loc+"/main.html";
   let pass = bcrypt.genSalt(saltRounds,function (err,salt){
     bcrypt.hash(password,saltRounds,function(err,hash){
       if(err) {
@@ -101,7 +109,7 @@ app.post('/reg',(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
   let mail = req.body.mail;
-  let loc = "http://localhost:5500/main.html";
+  loc+"/main.html";
   let pass = bcrypt.genSalt(saltRounds,function (err,salt){
     bcrypt.hash(password,saltRounds,function(err,hash){
       if(err) {
@@ -136,7 +144,7 @@ app.put("/data",(req,res)=>{
 
 app.post("/getID",(req,res)=>{
   let id = req.body;
-  let url = "http://localhost:5500/main.html?"
+  let url = loc+"/main.html?"
   res.write(url+id.id)
   res.send()
 })
