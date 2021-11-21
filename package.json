@@ -22,7 +22,7 @@
   },
   "scripts": {
     "test": "nodemon back.js",
-    "start": "node login.mjs"
+    "start": "node ./public/js/login.mjs"
   },
   "author": "MoSalah",
   "license": "ISC"
