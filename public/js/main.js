@@ -19,6 +19,7 @@ const uid = {
 un_get.open('POST','http://localhost:3000/user')
 un_get.setRequestHeader('content-type','application/json')
 un_get.send(JSON.stringify(uid));
+console.log("hi")
 un_get.onreadystatechange = ()=>{
     if(un_get.readyState == 4 && un_get.status == 200) {
         let str = JSON.parse(un_get.response)
@@ -75,8 +76,6 @@ feeding.onreadystatechange=()=>{
             div.append(p)
             feed.append(div)
         }
-    } else {
-        console.log('check again');
     }
 }
 

@@ -1,16 +1,5 @@
-var _superbasejs = require("@supabase/supabase-js")
-document.addEventListener("DOMContentLoaded",function (event) {
-//const {createClient} = supabase
-
-
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNjE0MzQ1NiwiZXhwIjoxOTUxNzE5NDU2fQ.-34dz8ixfgU2k9U1XEin9ETycmRPdGw68XLtdYKTSB8'
-
-const SUPABASE_URL = "https://rwcskqzxmqcotrbcilsz.supabase.co"
-
+import {supabase} from "./server.mjs"
 let btn = document.querySelector("#send")
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
 
   const em = document.querySelector("#email")
   const ps = document.querySelector("#pass")
@@ -34,6 +23,5 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
     }
   }
   btn.addEventListener("click",logIn)
-})
 
 
