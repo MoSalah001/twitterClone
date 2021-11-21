@@ -29,12 +29,12 @@ app.listen(serverPort,serverHost,function(){
 });
 
 app.use(express.json());
-
+/*
 app.get('/',(req,res)=>{
   res.sendFile(path.join(__dirname,'../../index.html'))
 })
 
-
+*/
 app.post('/feed',(req,res)=>{
   let id = req.body.id;
   console.log(id);
