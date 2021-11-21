@@ -21,7 +21,7 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "nodemon back.js",
+    "test": "nodemon ./public/js/back.js",
     "start": "node ./public/js/login.mjs"
   },
   "author": "MoSalah",

@@ -1,12 +1,14 @@
 const express = require('express');
 
+const cors = require("cors")
+
 const  { Pool }  = require("pg")
 
 const bcrypt = require("bcrypt")
 
 const saltRounds = 10
 
-var serverHost = process.env.HOST || '0.0.0.0'
+var serverHost = process.env.HOST || '127.0.0.1' || '0.0.0.0'
 
 var serverPort = process.env.PORT || 5000
 
@@ -23,10 +25,17 @@ const pool = new Pool({
 const app = express();
 
 app.listen(serverPort,serverHost,function(){
-  console.log("listening on port %d",serverPort);
+  console.log("listening on port %d",serverPort,serverHost);
 });
 
 app.use(express.json());
+app.use(cors())
+
+app.get('/',(req,res)=>{
+  console.log("hello there");
+  res.send("hello there!")
+})
+
 
 app.post('/feed',(req,res)=>{
   let id = req.body.id;
@@ -147,4 +156,10 @@ app.post("/getID",(req,res)=>{
   let url = loc+"/main.html?"
   res.write(url+id.id)
   res.send()
+})
+
+
+app.get('/test',(req,res)=>{
+  console.log("48al");
+  res.send("48al")
 })
