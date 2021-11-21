@@ -2,6 +2,8 @@ const express = require('express');
 
 const  { Pool }  = require("pg")
 
+const path = require("path")
+
 const bcrypt = require("bcrypt")
 
 const saltRounds = 10
@@ -29,8 +31,7 @@ app.listen(serverPort,serverHost,function(){
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-  console.log("hello there");
-  res.send("hello there!")
+  res.sendFile(path.join(__dirname,'index.html'))
 })
 
 
