@@ -6,6 +6,10 @@ const  { Pool }  = require("pg")
 
 const morgan = require("morgan")
 
+const bcrypt = require("bcrypt")
+
+const saltRounds = 10
+
 const pool = new Pool({
   user:"postgres",
   password:"Master@864722@",
@@ -16,9 +20,11 @@ const pool = new Pool({
 
 const app = express();
 
-app.listen(3000);
+app.listen(process.env.port || 3000);
 
 app.use(cors());
+
+app.use(morgan("combined"))
 
 app.use(express.json());
 
@@ -42,6 +48,7 @@ app.post('/feed',(req,res)=>{
 app.post('/user',(req,res) =>{
   let id = req.body.id
   let loc = "http://localhost:5500/main.html";
+  console.log(id);
   pool.connect()
   pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
     if(result !== undefined){
@@ -72,43 +79,58 @@ app.post('/mew',(req,res)=>{
 
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
-  let pass = req.body.pass;
+  let password = req.body.pass;
   let loc = "http://localhost:5500/main.html";
-  pool.connect()
-  pool.query('SELECT * FROM users WHERE uname = $1 AND pass =$2',[uname, pass],(err, result)=> {
-  if (err) {
-    console.log(err);
-  } else {
-    if(result.rows[0] !== undefined){
-  let url = loc+'?'+result.rows[0].user_id;
-  res.write((result.rows[0].user_id))
-  res.send()
-    }else {
-      res.status(404).send("wrong username or password please try again or create an account")
-    }
-  }
-})
+  let pass = bcrypt.genSalt(saltRounds,function (err,salt){
+    bcrypt.hash(password,saltRounds,function(err,hash){
+      if(err) {
+        res.send(err)
+      } else {
+      pool.connect()
+      pool.query('SELECT * FROM users WHERE uname = $1 AND pass =$2',[uname, pass],(err, result)=> {
+      if (err) {
+        console.log(err);
+      } else {
+        if(result.rows[0] !== undefined){
+      let url = loc+'?'+result.rows[0].user_id;
+      res.write((result.rows[0].user_id))
+      res.send()
+        }else {
+          res.status(404).send("wrong username or password please try again or create an account")
+            }
+          }
+        })
+      }
+    })
+  })
 })
 
 app.post('/reg',(req,res)=>{
   let uname = req.body.uname;
-  let pass = req.body.pass;
+  let password = req.body.pass;
   let mail = req.body.mail;
-  console.log(mail);
   let loc = "http://localhost:5500/main.html";
-  pool.connect()
-  pool.query('INSERT INTO users(uname,pass,email) VALUES ($1, $2, $3) RETURNING *',[uname, pass, mail],(err, result)=> {
-  if (err) {
-    console.log(err);
-  } else {
-    if(result.rows[0] !== undefined){
-  let url = loc+'?'+result.rows[0].user_id;
-  res.redirect(url)
-    }else {
-      res.status(404).send("please check again")
-    }
-  }
-})
+  let pass = bcrypt.genSalt(saltRounds,function (err,salt){
+    bcrypt.hash(password,saltRounds,function(err,hash){
+      if(err) {
+        res.send(err)
+      }else {
+      pool.connect()
+      pool.query('INSERT INTO users(uname,pass,email) VALUES ($1, $2, $3) RETURNING *',[uname, hash, mail],(err, result)=> {
+      if (err) {
+        console.log(err);
+      } else {
+        if(result.rows[0] !== undefined){
+      let url = loc+'?'+result.rows[0].user_id;
+      res.redirect(url)
+        }else {
+          res.status(404).send("please check again")
+            }
+          }
+        })
+      }
+    })
+  })
 })
 
 app.put("/data",(req,res)=>{
