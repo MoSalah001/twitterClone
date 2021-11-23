@@ -99,6 +99,7 @@ app.post("/login",(req,res)=>{
       } else {
         let pass = result.rows[0].pass
         console.log(pass);
+        console.log(password);
         bcrypt.compare(password,pass,(err,isMatch)=>{
           if(err){
             console.log('error here man');

@@ -67,5 +67,4 @@ function sending(e){
                 document.querySelector('#err').textContent =this.responseText
             }
         }
-        console.log('yes');
     }
