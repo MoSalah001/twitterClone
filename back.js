@@ -34,7 +34,7 @@ app.listen(serverPort,serverHost,function(){
 app.use(express.json());
 console.log(__dirname);
 app.get('/',(req,res)=>{
-  res.sendFile(__dirname+'public/js/index.html')
+  res.sendFile(__dirname+'/public/js/index.html')
 })
 
 app.post('/feed',(req,res)=>{
