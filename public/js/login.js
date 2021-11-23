@@ -47,6 +47,7 @@ const http = new XMLHttpRequest();
 let btn = document.querySelector("#send")
 btn.addEventListener("click",sending)
 
+const backend = process.env.Host+':'+process.env.PORT+'/'
 
 function sending(e){
     e.preventDefault();
@@ -54,13 +55,13 @@ function sending(e){
         uname : us.value,
         pass : ps.value
     }
-        http.open("POST","./login")
+        http.open("POST",backend+"login")
         http.setRequestHeader('content-type','application/json')
         http.send(JSON.stringify(login));
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 let uid = {id:this.response}
-                http.open("post","./getID")
+                http.open("post",backend+"getID")
                 http.setRequestHeader('content-type','application/json')
                 http.send(JSON.stringify(uid))
                 http.onreadystatechange = ()=>{
