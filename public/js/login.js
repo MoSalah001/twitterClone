@@ -64,7 +64,7 @@ function sending(e){
                 window.localStorage.setItem('ID',uid.id)
                 http.open("get",backend+"getHome")
             } else {
-                console.log('no');
+                document.querySelector('#err').textContent =this.responseText
             }
         }
         console.log('yes');
