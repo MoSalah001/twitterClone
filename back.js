@@ -158,7 +158,7 @@ app.put("/data",(req,res)=>{
 
 app.get("/getHome",(req,res)=>{
   console.log('got it');
-  res.redirect(uri+'main.html')
+  res.redirect('/main.html')
 })
 
 
