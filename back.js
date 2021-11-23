@@ -159,7 +159,7 @@ app.put("/data",(req,res)=>{
 })
 
 app.get("/getHome",(req,res)=>{
-  res.render(uri+'main.html')
+  res.redirect(uri+'main.html')
 })
 
 
