@@ -9,6 +9,7 @@ const path = require("path")
 const bcrypt = require("bcrypt");
 const { pathToFileURL } = require('url');
 const { stringify } = require('querystring');
+const { json } = require('body-parser');
 
 const uri = __dirname+'/public/js/'
 
@@ -93,7 +94,8 @@ app.post('/mew',(req,res)=>{
 
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
-  let password = JSON.stringfy(req.body.pass);
+  let str=JSON.stringify(req.body)
+  console.log(str);
       pool.query('SELECT pass FROM users WHERE uname = $1',[uname],(err, result)=> {
       if (err) {
         res.status(404).send('you entered a wrong username, please try again');
