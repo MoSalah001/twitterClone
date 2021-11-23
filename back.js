@@ -94,9 +94,7 @@ app.post('/mew',(req,res)=>{
 
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
-  let password = req.body.pass
-  console.log(password);
-  console.log(password.toString());
+  let password = req.body.pass.toString()
 
       pool.query('SELECT pass FROM users WHERE uname = $1',[uname],(err, result)=> {
       if (err) {
