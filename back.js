@@ -115,7 +115,6 @@ app.post("/login",(req,res)=>{
       }
     })
   })
-})
 
 app.post('/reg',(req,res)=>{
   let uname = req.body.uname;
