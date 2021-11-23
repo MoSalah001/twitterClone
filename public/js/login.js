@@ -47,7 +47,7 @@ const http = new XMLHttpRequest();
 let btn = document.querySelector("#send")
 btn.addEventListener("click",sending)
 
-const backend = process.env.Host+':'+process.env.PORT+'/'
+const backend = 'http://0.0.0.0/'
 
 function sending(e){
     e.preventDefault();
