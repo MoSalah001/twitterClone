@@ -1,5 +1,7 @@
 const express = require('express');
 
+const cors = require('cors')
+
 const  { Pool }  = require("pg")
 
 const path = require("path")
@@ -8,11 +10,12 @@ const bcrypt = require("bcrypt")
 
 const saltRounds = 10
 
-var serverHost = process.env.HOST || '0.0.0.0'
+var serverHost = process.env.HOST || '127.0.0.1' || '0.0.0.0'
 
 var serverPort = process.env.PORT || 5000
 
-let loc = serverHost+serverPort
+let loc = 'http://'+serverHost+serverPort
+console.log(serverHost);
 
 const pool = new Pool({
   user:"postgres",
@@ -24,14 +27,16 @@ const pool = new Pool({
 
 const app = express();
 
+app.use(cors())
+
 app.listen(serverPort,serverHost,function(){
   console.log("listening on port %d",serverPort,serverHost);
 });
 
 app.use(express.json());
 
-app.get("/",(req,res)=>{
-  res.sendFile('./index.html')
+app.get('/',(req,res)=>{
+  res.sendFile(__dirname+'/index.html')
 })
 
 app.post('/feed',(req,res)=>{
@@ -93,6 +98,7 @@ app.post("/login",(req,res)=>{
         res.send(err)
       } else {
       pool.connect()
+      console.log("connected");
       pool.query('SELECT * FROM users WHERE uname = $1 AND pass =$2',[uname, pass],(err, result)=> {
       if (err) {
         console.log(err);
@@ -102,6 +108,7 @@ app.post("/login",(req,res)=>{
       res.write((result.rows[0].user_id))
       res.send()
         }else {
+          console.log(result.rows);
           res.status(404).send("wrong username or password please try again or create an account")
             }
           }
