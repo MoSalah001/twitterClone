@@ -1,7 +1,5 @@
 const express = require('express');
 
-const cors = require('cors')
-
 const  { Pool }  = require("pg")
 
 const path = require("path")
@@ -26,8 +24,6 @@ const pool = new Pool({
 });
 
 const app = express();
-
-app.use(cors())
 
 app.listen(serverPort,serverHost,function(){
   console.log("listening on port %d",serverPort,serverHost);
