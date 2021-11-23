@@ -100,7 +100,6 @@ app.post("/login",(req,res)=>{
       } else {
         console.log(uname,hash);
       pool.query('SELECT * FROM users WHERE uname = $1 OR pass =$2',[uname, hash],(err, result)=> {
-        console.log(result);
       if (err) {
         console.log(err);
       } else {
@@ -157,6 +156,7 @@ app.put("/data",(req,res)=>{
 })
 
 app.get("/getHome",(req,res)=>{
+  console.log('got it');
   res.sendFile(uri+'main.html')
 })
 

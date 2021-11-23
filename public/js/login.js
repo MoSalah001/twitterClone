@@ -63,13 +63,9 @@ function sending(e){
                 let uid = {id:this.response}
                 window.localStorage.setItem('ID',uid.id)
                 http.open("get",backend+"getHome")
-                http.onreadystatechange = ()=>{
-                    if(this.readyState == 4 && this.status == 200) {
-                        console.log('yes');
-                    }
-                }
             } else {
-                document.getElementById('err').innerText = this.response
+                console.log('no');
             }
         }
-}
+        console.log('yes');
+    }
