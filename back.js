@@ -159,7 +159,7 @@ app.put("/data",(req,res)=>{
 })
 
 app.get("/getHome",(req,res)=>{
-  res.sendFile(uri+'main.html')
+  res.render(uri+'main.html')
 })
 
 
