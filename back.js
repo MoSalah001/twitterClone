@@ -157,7 +157,7 @@ app.put("/data",(req,res)=>{
 })
 
 app.get("/getHome",(req,res)=>{
-  res.redirect('/test')
+  res.sendFile('./js/test')
 })
 
 
