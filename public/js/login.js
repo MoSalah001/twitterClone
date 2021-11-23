@@ -47,7 +47,7 @@ const http = new XMLHttpRequest();
 let btn = document.querySelector("#send")
 btn.addEventListener("click",sending)
 
-const backend = 'https://0.0.0.0/'
+const backend = 'https://twitter-draft-copy.herokuapp.com/'
 
 function sending(e){
     e.preventDefault();
