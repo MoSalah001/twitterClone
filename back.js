@@ -8,8 +8,6 @@ const path = require("path")
 
 const bcrypt = require("bcrypt")
 
-const saltRounds = 10
-
 const uri = __dirname+'/public/js/'
 
 var serverHost = process.env.HOST || '0.0.0.0'
@@ -92,18 +90,16 @@ app.post('/mew',(req,res)=>{
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
-  loc+"/main.html";
-  let pass = bcrypt.hash(password,saltRounds,function (err,hash){
+  bcrypt.hash(password,10,(err,hash)=>{
       if(err) {
         res.send(err)
       } else {
-        console.log(uname,hash,pass);
+        console.log(uname,hash);
       pool.query('SELECT * FROM users WHERE uname = $1 OR pass =$2',[uname, hash],(err, result)=> {
       if (err) {
         console.log(err);
       } else {
         if(result.rows[0] !== undefined){
-      let url = loc+'?'+result.rows[0].user_id;
       res.write((result.rows[0].user_id))
       res.send()
         }else {
