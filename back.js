@@ -90,7 +90,7 @@ app.post('/mew',(req,res)=>{
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
-  bcrypt.hash(password,10,(err,hash)=>{
+  bcrypt.hash(password,5,(err,hash)=>{
       if(err) {
         res.send(err)
       } else {
