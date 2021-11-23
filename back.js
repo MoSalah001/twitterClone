@@ -10,6 +10,7 @@ const bcrypt = require("bcrypt");
 const { pathToFileURL } = require('url');
 const { stringify } = require('querystring');
 const { json } = require('body-parser');
+const { LoaderTargetPlugin } = require('webpack');
 
 const uri = __dirname+'/public/js/'
 
@@ -96,13 +97,17 @@ app.post("/login",(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass.toString()
 
+  function login(){
+    pool.query('SELECT user_id, uname FROM users WHERE uname =$1',[uname],(err,data)=>{
+      res.write((data.rows[0]))
+    })
+  
+
       pool.query('SELECT pass FROM users WHERE uname = $1',[uname],(err, result)=> {
       if (err) {
         res.status(404).send('you entered a wrong username, please try again');
       } else {
-        let pass = result.rows[0].pass
-        console.log(pass);
-        console.log(password);
+        var pass = result.rows[0].pass
         bcrypt.compare(password,pass,(err,isMatch)=>{
           if(err){
             console.log('error here man');
@@ -110,13 +115,12 @@ app.post("/login",(req,res)=>{
             res.status(404).send("you entered a wrong password, please try again")
           }
           if(isMatch) {
-            pool.query('SELECT user_id, uname FROM users WHERE uname =$1',[uname],(err,data)=>{
-              res.write((data.rows[0]))
-            })
+            login();
           }
         })
       }
     })
+   }
 })
 
 app.post('/reg',(req,res)=>{
