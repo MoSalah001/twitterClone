@@ -10,12 +10,13 @@ const bcrypt = require("bcrypt")
 
 const saltRounds = 10
 
+const uri = __dirname+'/public/js/'
+
 var serverHost = process.env.HOST || '0.0.0.0'
 
 var serverPort = process.env.PORT || 3000
 
-let loc = 'http://'+serverHost+serverPort
-console.log(serverHost);
+let loc = 'https://twitter-draft-copy.herokuapp.com/'
 
 const pool = new Pool({
   user:"postgres",
@@ -36,7 +37,7 @@ app.listen(serverPort,serverHost,function(){
 app.use(express.json());
 
 app.get('/',(req,res)=>{
-  res.sendFile(__dirname+'/public/js/index.html')
+  res.sendFile(uri+'index.html')
 })
 
 app.post('/feed',(req,res)=>{
@@ -93,7 +94,7 @@ app.post("/login",(req,res)=>{
   let password = req.body.pass;
   loc+"/main.html";
   let pass = bcrypt.genSalt(saltRounds,function (err,salt){
-    bcrypt.hash(password,saltRounds,function(err,hash){
+    bcrypt.hash(password,salt,function(err,hash){
       if(err) {
         res.send(err)
       } else {
@@ -155,11 +156,8 @@ app.put("/data",(req,res)=>{
   })
 })
 
-app.post("/getID",(req,res)=>{
-  let id = req.body;
-  let url = loc+"/main.html?"
-  res.write(url+id.id)
-  res.send()
+app.get("/getHome",(req,res)=>{
+  res.sendFile(uri+'main.html')
 })
 
 

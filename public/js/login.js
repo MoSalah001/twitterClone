@@ -61,12 +61,11 @@ function sending(e){
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 let uid = {id:this.response}
-                http.open("post",backend+"getID")
-                http.setRequestHeader('content-type','application/json')
-                http.send(JSON.stringify(uid))
+                window.localStorage.setItem('ID',uid.id)
+                http.open("get",backend+"getHome")
                 http.onreadystatechange = ()=>{
                     if(this.readyState == 4 && this.status == 200) {
-                        window.location= this.response
+                        console.log('yes');
                     }
                 }
             } else {
