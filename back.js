@@ -97,8 +97,7 @@ app.post("/login",(req,res)=>{
       if (err) {
         res.status(404).send('you entered a wrong username, please try again');
       } else {
-        let pass = result.rows[0]
-        console.log(pass);
+        let pass = result.rows[0].pass
         bcrypt.compare(password,pass,(err,isMatch)=>{
           if(err){
             console.log(password);
