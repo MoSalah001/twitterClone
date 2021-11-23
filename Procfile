@@ -1,1 +1,1 @@
-web: node ./back/back.js
+web: node ./back.js

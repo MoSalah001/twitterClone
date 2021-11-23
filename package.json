@@ -21,7 +21,8 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "nodemon ./back/back.js"
+    "start":"node ./back.js",
+    "test": "nodemon ./back.js"
   },
   "author": "MoSalah",
   "license": "ISC"
