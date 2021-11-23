@@ -68,7 +68,8 @@ function sending(e){
         }
         http.open("get",backend+"getHome")
         http.send()
-        if(http.status(302)){
+        if(http.status == 302){
+            console.log('hna');
             window.location = this.response
         }
     }
