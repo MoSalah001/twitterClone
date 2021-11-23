@@ -69,8 +69,10 @@ function sending(e){
         http.open("get",backend+"getHome")
         http.send()
         http.onreadystatechange = ()=>{
-            if(this.readyState == 4 && this.status == 200) {
-                console.log(this.response);
+            if(this.status == 200) {
+                console.log('wslt hna');
+                http.open('get',backend+'test')
+                http.send()
             }
         }
     }

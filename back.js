@@ -32,6 +32,8 @@ const pool = new Pool({
 
 const app = express();
 
+app.engine('html',require('ejs').renderFile)
+
 app.use(express.static('public'))
 
 app.listen(serverPort,serverHost,function(){
