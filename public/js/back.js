@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt")
 
 const saltRounds = 10
 
-var serverHost = process.env.HOST || '127.0.0.1' || '0.0.0.0'
+var serverHost = process.env.HOST || '0.0.0.0'
 
 var serverPort = process.env.PORT || 5000
 
