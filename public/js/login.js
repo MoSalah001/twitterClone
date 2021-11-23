@@ -54,13 +54,13 @@ function sending(e){
         uname : us.value,
         pass : ps.value
     }
-        http.open("POST","http://localhost:3000/login")
+        http.open("POST","./login")
         http.setRequestHeader('content-type','application/json')
         http.send(JSON.stringify(login));
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 let uid = {id:this.response}
-                http.open("post","127.0.0.1:3000/getID")
+                http.open("post","./getID")
                 http.setRequestHeader('content-type','application/json')
                 http.send(JSON.stringify(uid))
                 http.onreadystatechange = ()=>{
