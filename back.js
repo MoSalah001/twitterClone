@@ -6,9 +6,12 @@ const  { Pool }  = require("pg")
 
 const path = require("path")
 
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { pathToFileURL } = require('url');
 
 const uri = __dirname+'/public/js/'
+
+const saltRounds = 10
 
 var serverHost = process.env.HOST || '0.0.0.0'
 
@@ -90,27 +93,24 @@ app.post('/mew',(req,res)=>{
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
-  bcrypt.hash(password,5,(err,hash)=>{
-      if(err) {
-        res.send(err)
-      } else {
-        console.log(uname,hash);
-      pool.query('SELECT * FROM users WHERE uname = $1 OR pass =$2',[uname, hash],(err, result)=> {
+      pool.query('SELECT pass FROM users WHERE uname = $1',[uname],(err, result)=> {
       if (err) {
-        console.log(err);
+        res.status(404).send('you entered a wrong username, please try again');
       } else {
-        if(result.rows[0] !== undefined){
-      res.write((result.rows[0].user_id))
-      res.send()
-        }else {
-          console.log(result.rows);
-          res.status(404).send("wrong username or password please try again or create an account")
-            }
+        let pass = result.rows[0]
+        bcrypt.compare(password,pass,(err,isMatch)=>{
+          if(err){
+            res.status(404).send("you entered a wrong password, please try again")
+          }
+          if(isMatch) {
+            pool.query('SELECT user_id, uname FROM users WHERE uname =$1',[uname],(err,data)=>{
+              res.write((data.rows[0]))
+            })
           }
         })
       }
     })
-  })
+})
 
 app.post('/reg',(req,res)=>{
   let uname = req.body.uname;
