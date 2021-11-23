@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+const supabaseMD = require('@supabase/supabase-js')
 
 const express = require('express');
 
