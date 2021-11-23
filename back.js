@@ -157,13 +157,12 @@ app.put("/data",(req,res)=>{
 })
 
 app.get("/getHome",(req,res)=>{
-  console.log('got it');
-  res.redirect('./js/main.html')
+  res.redirect('/test')
 })
 
 
 app.get('/test',(req,res)=>{
-  console.log("48al");
-  res.send("48al")
+  console.log('got it too');
+res.render('./js/main.html',)
 })
 
