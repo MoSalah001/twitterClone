@@ -93,8 +93,7 @@ app.post('/mew',(req,res)=>{
 
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
-  let password = stringfy(req.body.pass);
-  console.log(password);
+  let password = JSON.stringfy(req.body.pass);
       pool.query('SELECT pass FROM users WHERE uname = $1',[uname],(err, result)=> {
       if (err) {
         res.status(404).send('you entered a wrong username, please try again');
