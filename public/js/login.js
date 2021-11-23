@@ -63,6 +63,7 @@ function sending(e){
                 let uid = {id:this.response}
                 window.localStorage.setItem('ID',uid.id)
                 http.open("get",backend+"getHome")
+                http.send()
             } else {
                 document.querySelector('#err').textContent =this.responseText
             }
