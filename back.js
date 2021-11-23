@@ -100,14 +100,14 @@ app.post("/login",(req,res)=>{
  
   
 
-      pool.query('SELECT pass FROM users WHERE uname = $1',[uname],(err, result)=> {
+      pool.query('SELECT pass,user_id,uname FROM users WHERE uname = $1',[uname],(err, result)=> {
         console.log('query m4 gd3');
       if (err) {
         console.log('fl2wl');
         res.status(404).send('you entered a wrong username, please try again');
       } else {
         console.log('hna y w74');
-        var pass = result.rows[0].pass
+        pass = result.rows[0].pass
         bcrypt.compare(password,pass,(err,isMatch)=>{
           console.log('hash 3l2');
           if(err){
@@ -117,9 +117,7 @@ app.post("/login",(req,res)=>{
           }
           if(isMatch) {
             console.log('matched');
-              pool.query('SELECT user_id, uname FROM users WHERE uname =$1',[uname],(err,data)=>{
-                res.write((data.rows[0]))
-              })
+            res.send(result.rows[0].user_id)
           }
         })
       }
