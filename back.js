@@ -95,9 +95,9 @@ app.post("/login",(req,res)=>{
       if(err) {
         res.send(err)
       } else {
-      pool.connect()
-      console.log("connected");
+        console.log(uname,pass);
       pool.query('SELECT * FROM users WHERE uname = $1 AND pass =$2',[uname, pass],(err, result)=> {
+        console.log(result);
       if (err) {
         console.log(err);
       } else {
