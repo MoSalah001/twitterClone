@@ -62,10 +62,10 @@ function sending(e){
             if(this.readyState == 4 && this.status == 200){
                 let uid = {id:this.response}
                 window.localStorage.setItem('ID',uid.id)
-                http.open("get",backend+"getHome")
-                http.send()
             } else {
                 document.querySelector('#err').textContent =this.responseText
             }
         }
+        http.open("get",backend+"getHome")
+        http.send()
     }
