@@ -97,31 +97,35 @@ app.post("/login",(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass.toString()
 
-  function login(){
-    pool.query('SELECT user_id, uname FROM users WHERE uname =$1',[uname],(err,data)=>{
-      res.write((data.rows[0]))
-    })
+ 
   
 
       pool.query('SELECT pass FROM users WHERE uname = $1',[uname],(err, result)=> {
+        console.log('query m4 gd3');
       if (err) {
+        console.log('fl2wl');
         res.status(404).send('you entered a wrong username, please try again');
       } else {
+        console.log('hna y w74');
         var pass = result.rows[0].pass
         bcrypt.compare(password,pass,(err,isMatch)=>{
+          console.log('hash 3l2');
           if(err){
             console.log('error here man');
             console.log(password);
             res.status(404).send("you entered a wrong password, please try again")
           }
           if(isMatch) {
-            login();
+            console.log('matched');
+              pool.query('SELECT user_id, uname FROM users WHERE uname =$1',[uname],(err,data)=>{
+                res.write((data.rows[0]))
+              })
           }
         })
       }
     })
-   }
-})
+  }
+)
 
 app.post('/reg',(req,res)=>{
   let uname = req.body.uname;
