@@ -93,12 +93,11 @@ app.post("/login",(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
   loc+"/main.html";
-  let pass = bcrypt.genSalt(saltRounds,function (err,salt){
-    bcrypt.hash(password,salt,function(err,hash){
+  let pass = bcrypt.hash(password,saltRounds,function (err,hash){
       if(err) {
         res.send(err)
       } else {
-        console.log(uname,hash);
+        console.log(uname,hash,pass);
       pool.query('SELECT * FROM users WHERE uname = $1 OR pass =$2',[uname, hash],(err, result)=> {
       if (err) {
         console.log(err);
