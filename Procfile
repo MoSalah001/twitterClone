@@ -1,1 +1,1 @@
-web: node ./public/js/back.js
+web: node ./back/back.js

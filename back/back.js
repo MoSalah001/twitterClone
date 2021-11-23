@@ -10,7 +10,7 @@ const saltRounds = 10
 
 var serverHost = process.env.HOST || '0.0.0.0'
 
-var serverPort = process.env.PORT || 5000
+var serverPort = process.env.PORT || 3000
 
 let loc = 'http://'+serverHost+serverPort
 console.log(serverHost);
@@ -24,6 +24,8 @@ const pool = new Pool({
 });
 
 const app = express();
+
+app.use(express.static('public'))
 
 app.listen(serverPort,serverHost,function(){
   console.log("listening on port %d",serverPort,serverHost);
@@ -163,3 +165,4 @@ app.get('/test',(req,res)=>{
   console.log("48al");
   res.send("48al")
 })
+
