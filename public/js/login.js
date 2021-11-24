@@ -69,8 +69,6 @@ function sending(e){
     }
 async function redirectToMain(){
     await sending()
-    .then(()=>{
-        http.open("get",backend+"getHome")
-        http.send()
-    })
+    http.open("get",backend+"getHome")
+    http.send()
 }
