@@ -72,5 +72,5 @@ function redirectToMain(){
     if(window.localStorage.ID)
     http.open("get",backend+"getHome")
     http.send()
-    console.log(this);
+    console.log(http.responseURL);
 }
