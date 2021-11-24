@@ -161,10 +161,3 @@ app.put("/data",(req,res)=>{
 app.post("/getHome",(req,res)=>{
   res.redirect(loc+'./js/main.html')
 })
-
-
-app.get('/test',(req,res)=>{
-  console.log('got it too');
-res.render('./js/main.html',)
-})
-

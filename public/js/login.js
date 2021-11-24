@@ -60,7 +60,7 @@ function sending(e){
         http.send(JSON.stringify(login));
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                let uid = {id:this.response}
+                const uid = {id:this.response}
                return window.localStorage.setItem('ID',uid.id)
             } else {
                 document.querySelector('#err').textContent =this.responseText
@@ -75,7 +75,6 @@ function redirectToMain(){
     http.send()
     http.onreadystatechange = function(){
         if(this.readyState == 4)
-        console.log(this.responseURL);
         window.location = this.responseURL
     }
 }
