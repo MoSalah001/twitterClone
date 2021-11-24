@@ -40,7 +40,7 @@ function send() {
         user : uid.id,
     }
     
-    http.open('POST','http://localhost:3000/mew',true)
+    http.open('POST',backend+'mew',true)
 
     http.setRequestHeader('content-type','application/json')
 
