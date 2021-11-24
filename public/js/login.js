@@ -66,10 +66,4 @@ function sending(e){
                 document.querySelector('#err').textContent =this.responseText
             }
         }
-        http.open("get",backend+"getHome")
-        http.send()
-        if(http.status == 302){
-            console.log('hna');
-            window.location = this.response
-        }
     }
