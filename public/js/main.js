@@ -4,28 +4,25 @@ const submit = document.getElementById('button')
 
 const username = document.getElementById("uname")
 
+const backend = 'https://twitter-draft-copy.herokuapp.com/'
+
 const un_get = new XMLHttpRequest()
 
 const feeding = new XMLHttpRequest();
 
-let id = window.location.search
-
-window.localStorage.setItem("id",id.split('?').slice(1))
-
 const uid = {
-    id:window.localStorage.getItem('id')
+    id:window.localStorage.getItem('ID')
 }
 
-un_get.open('POST','http://localhost:3000/user')
+un_get.open('POST',backend+'user')
 un_get.setRequestHeader('content-type','application/json')
 un_get.send(JSON.stringify(uid));
-console.log("hi")
 un_get.onreadystatechange = ()=>{
     if(un_get.readyState == 4 && un_get.status == 200) {
         let str = JSON.parse(un_get.response)
         console.log(un_get.response);
         username.textContent = `Hello, ${str}`
-    }else if( uid.id < 1){
+    }else if(!window.localStorage.ID){
         window.location = un_get.responseURL
     }
 }
@@ -58,7 +55,7 @@ function send() {
 }
 
 
-feeding.open("POST","http://localhost:3000/feed");
+feeding.open("POST",backend+"feed");
 feeding.setRequestHeader('content-type','application/json')
 feeding.send(JSON.stringify(uid))
 feeding.onreadystatechange=()=>{

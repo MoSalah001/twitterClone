@@ -1,4 +1,5 @@
 export default function tweeta(){
+    const backend = 'https://twitter-draft-copy.herokuapp.com/'
     let un_url = document.URL
     let i =un_url.search("html")
     let origin = document.querySelector('#tweets')
@@ -20,7 +21,7 @@ let tweet = class {
     }
 }
 let http = new XMLHttpRequest()
-http.open("PUT","http://localhost:3000/data",true)
+http.open("PUT",backend+"data",true)
 http.setRequestHeader('content-type','application/json')
 http.send(JSON.stringify(i))
 http.onreadystatechange = () =>{

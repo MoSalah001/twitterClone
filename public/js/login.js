@@ -70,15 +70,4 @@ function sending(e){
                 document.querySelector('#err').textContent =this.responseText
             }
         }
-//        redirectToMain();
     }
-function redirectToMain(){
-    if(window.localStorage.ID)
-    console.log(window.localStorage.ID);
-    http.open("post",backend+"getHome")
-    http.send()
-    http.onreadystatechange = function(){
-        if(this.readyState == 4)
-        window.location = this.responseURL
-    }
-}
