@@ -48,7 +48,7 @@ function send() {
     
     http.onreadystatechange = ()=>{
         if(http.readyState == 4 && http.status == 200){
-            window.location=http.responseURL+`?${uid.id}`;
+            window.location=http.responseURL;
         }
     }
 }
