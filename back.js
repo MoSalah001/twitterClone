@@ -158,7 +158,7 @@ app.put("/data",(req,res)=>{
   })
 })
 
-app.get("/getHome",(req,res)=>{
+app.post("/getHome",(req,res)=>{
   res.redirect(loc+'./js/main.html')
 })
 
