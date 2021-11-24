@@ -87,7 +87,7 @@ app.post('/mew',(req,res)=>{
     if(err) {res.send(err);}
     else {
       if(result.rows[0] !== undefined) {           
-        let refresh = req.headers.origin+'/main.html';
+        let refresh = loc+'main.html';
         res.redirect(refresh)
           }
       }
