@@ -61,8 +61,6 @@ function sending(e){
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 let data = JSON.parse(this.response)
-                console.log(data.id);
-                console.log(data.url);
                 const uid = {id:data.id}
                window.localStorage.setItem('ID',uid.id)
                return window.location = data.url

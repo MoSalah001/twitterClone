@@ -48,7 +48,6 @@ app.get('/',(req,res)=>{
 
 app.post('/feed',(req,res)=>{
   let id = req.body.id;
-  console.log(id);
   pool.connect();
   pool.query('SELECT * FROM tweets WHERE user_id = $1',[id],(err,result)=>{
     if(err) {
@@ -66,7 +65,6 @@ app.post('/feed',(req,res)=>{
 app.post('/user',(req,res) =>{
   let id = req.body.id
   loc+"/main.html";
-  console.log(id);
   pool.connect()
   pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
     if(result !== undefined){
@@ -80,6 +78,8 @@ app.post('/user',(req,res) =>{
 app.post('/mew',(req,res)=>{
   let tweet = req.body.body
   let user = req.body.user.id
+  console.log(user);
+  console.log(req.body);
   pool.connect()
   pool.query("SELECT uname FROM users WHERE user_id = $1",[user],(err, result)=>{
     console.log(result);
