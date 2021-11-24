@@ -59,7 +59,7 @@ function sending(e){
         http.setRequestHeader('content-type','application/json')
         http.send(JSON.stringify(login));
         http.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
+            if(this.readyState == 4){
                 let uid = {id:this.response}
                 window.localStorage.setItem('ID',uid.id)
             } else {
