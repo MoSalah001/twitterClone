@@ -73,9 +73,9 @@ function redirectToMain(){
     console.log(window.localStorage.ID);
     http.open("post",backend+"getHome")
     http.send()
-    http.onreadystatechange = ()=>{
+    http.onreadystatechange = function(){
         if(this.readyState == 4)
-        console.log(this.response);
+        console.log(this.responseURL);
         window.location = this.responseURL
     }
 }
