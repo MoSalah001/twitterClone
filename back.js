@@ -78,17 +78,14 @@ app.post('/user',(req,res) =>{
 app.post('/mew',(req,res)=>{
   let tweet = req.body.body
   let user = req.body.user
-  console.log(user);
-  console.log(req.body);
   pool.connect()
   pool.query("SELECT uname FROM users WHERE user_id = $1",[user],(err, result)=>{
-    console.log(result);
    var userName = result.rows[0].uname;
   pool.query("INSERT INTO tweets(tweet,user_id,uname) VALUES($1, $2, $3) RETURNING *",[tweet, user, userName],(err, result)=>{
     if(err) {res.send(err);}
     else {
       if(result.rows[0] !== undefined) {           
-        let refresh = loc+'main.html';
+        let refresh = loc+'js/main.html';
         res.redirect(refresh)
           }
       }
