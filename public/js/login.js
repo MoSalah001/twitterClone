@@ -62,13 +62,14 @@ function sending(e){
             if(this.readyState == 4){
                 let uid = {id:this.response}
                 window.localStorage.setItem('ID',uid.id)
-                redirectToMain();
             } else {
                 document.querySelector('#err').textContent =this.responseText
             }
         }
+        redirectToMain();
     }
 function redirectToMain(){
+    if(window.localStorage.ID)
     http.open("get",backend+"getHome")
     http.send()
 }
