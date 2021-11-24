@@ -77,7 +77,7 @@ app.post('/user',(req,res) =>{
 
 app.post('/mew',(req,res)=>{
   let tweet = req.body.body
-  let user = req.body.user.id
+  let user = req.body.user
   console.log(user);
   console.log(req.body);
   pool.connect()
