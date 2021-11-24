@@ -20,7 +20,6 @@ un_get.send(JSON.stringify(uid));
 un_get.onreadystatechange = ()=>{
     if(un_get.readyState == 4 && un_get.status == 200) {
         let str = JSON.parse(un_get.response)
-        console.log(un_get.response);
         username.textContent = `Hello, ${str}`
     }else if(!window.localStorage.ID){
         window.location = un_get.responseURL

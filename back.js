@@ -82,6 +82,7 @@ app.post('/mew',(req,res)=>{
   let user = req.body.user.id
   pool.connect()
   pool.query("SELECT uname FROM users WHERE user_id = $1",[user],(err, result)=>{
+    console.log(result);
    var userName = result.rows[0].uname;
   pool.query("INSERT INTO tweets(tweet,user_id,uname) VALUES($1, $2, $3) RETURNING *",[tweet, user, userName],(err, result)=>{
     if(err) {res.send(err);}
