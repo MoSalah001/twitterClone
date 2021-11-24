@@ -117,7 +117,7 @@ app.post("/login",(req,res)=>{
               id:result.rows[0].user_id,
               url:loc+'./js/main.html'
             }
-            res.send(data)
+            res.send(JSON.parse(data))
           }
         })
       }
