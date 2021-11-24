@@ -37,7 +37,7 @@ submit.addEventListener('click', send)
 function send() {
     let tweeting = {
         body : tweet.value,
-        user : uid,
+        user : uid.id,
     }
     
     http.open('POST','http://localhost:3000/mew',true)
