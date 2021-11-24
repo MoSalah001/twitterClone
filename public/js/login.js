@@ -61,7 +61,7 @@ function sending(e){
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 let uid = {id:this.response}
-                window.localStorage.setItem('ID',uid.id)
+               return window.localStorage.setItem('ID',uid.id)
             } else {
                 document.querySelector('#err').textContent =this.responseText
             }
@@ -70,6 +70,7 @@ function sending(e){
     }
 function redirectToMain(){
     if(window.localStorage.ID)
+    console.log(window.localStorage.ID);
     http.open("get",backend+"getHome")
     http.send()
     console.log(http.responseURL);
