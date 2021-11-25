@@ -1,4 +1,11 @@
-const myEnv = require('dotenv').config()
+const myEnv = require('dotenv')
+
+const envo = myEnv.config({path:'./config.env'})
+if (envo.error){
+  throw envo.error
+}
+
+console.log(envo.parsed);
 
 const express = require('express');
 
