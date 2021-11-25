@@ -22,7 +22,13 @@ function sending(e){
         http.send(JSON.stringify(reg));
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                window.location = this.responseURL
+                let respnd = JSON.parse(this.response)
+                let data = {
+                    id:respnd.id,
+                    url:respnd.url
+                }
+                window.localStorage.setItem(ID,data.id)
+                return window.location = data.url
             } else {
                 document.getElementById('err').innerText = this.response
             }
