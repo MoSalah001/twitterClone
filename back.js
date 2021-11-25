@@ -1,6 +1,6 @@
 const myEnv = require('dotenv')
 
-const envo = myEnv.config({path:'./config.env'})
+const envo = myEnv.config({path:'config.env'})
 if (envo.error){
   throw envo.error
 }
