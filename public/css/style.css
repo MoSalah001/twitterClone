@@ -30,3 +30,19 @@ padding: 5px;
     display: none;
 }
 
+.tweet {
+    color: red;
+    border: blue 0.5px ridge;
+    margin: 5px 20px 50px 20px;
+    padding: 3px 10px 0px 10px;
+}
+
+.tweet p {
+    border: yellow 2px solid;
+    margin: 0px 0px 0px 0px;
+    /* width: fit-content; */
+}
+
+.users {
+    width: fit-content;
+}

@@ -1,13 +1,12 @@
 export default function tweeta(){
     const backend = 'https://twitter-draft-copy.herokuapp.com/'
     let un_url = document.URL
-    let i =un_url.search("html")
     let origin = document.querySelector('#tweets')
     let div = document.createElement("div")
     let h4 = document.createElement('h4')
     let p = document.createElement('p')
-i ={
-    id:un_url.slice(i+5)
+let i ={
+    id:window.localStorage.getItem(ID)
 }
 let tweet = class {
     constructor(div, h4, p, text, user, id, origin) {
