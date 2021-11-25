@@ -37,7 +37,7 @@ padding: 5px;
     color: whitesmoke;
     background-color: rgb(13, 13, 73);
     border: rgb(13, 13, 73) 0.5px ridge;
-    margin: 5px 20px 50px 20px;
+    margin: 5px 0px 50px 0px;
     padding: 3px 10px 0px 10px;
 }
 
@@ -52,8 +52,10 @@ padding: 5px;
 
 #tweets {
     width: 40%;
+    margin: 0 auto;
 }
 
 #tweets-area {
     margin: 0 auto;
+    width: 100%;
 }
