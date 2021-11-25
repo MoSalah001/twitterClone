@@ -7,6 +7,8 @@ const http = new XMLHttpRequest();
 let btn = document.querySelector("#send")
 btn.addEventListener("click",sending)
 
+const backend = 'https://twitter-draft-copy.herokuapp.com/'
+
 function sending(e){
     e.preventDefault();
     if(ps.value === pschk.value && ml.value === mlchk.value && us !=""){
@@ -15,7 +17,7 @@ function sending(e){
         pass : ps.value,
         mail: ml.value
     }
-        http.open("POST","http://localhost:3000/reg")
+        http.open("POST",backend+"reg")
         http.setRequestHeader('content-type','application/json')
         http.send(JSON.stringify(reg));
         http.onreadystatechange = function(){

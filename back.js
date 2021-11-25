@@ -5,8 +5,6 @@ if (envo.error){
   throw envo.error
 }
 
-console.log(envo.parsed);
-
 const express = require('express');
 
 const  { Pool }  = require("pg")
@@ -25,12 +23,6 @@ var serverHost = process.env.HOST || '0.0.0.0'
 var serverPort = process.env.PORT || 3000
 
 let loc = 'https://twitter-draft-copy.herokuapp.com/'
-
-console.log(process.env.DB_HOST);
-console.log(process.env.DB_USER);
-console.log(process.env.DB_PASSWORD);
-console.log(process.env.DB_PORT);
-console.log(process.env.DB_NAME);
 
 const pool = new Pool({
   user:process.env.DB_USER,
@@ -137,7 +129,7 @@ app.post('/reg',(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
   let mail = req.body.mail;
-  loc+"/main.html";
+  loc+"./js/main.html";
   let pass = bcrypt.genSalt(saltRounds,function (err,salt){
     bcrypt.hash(password,saltRounds,function(err,hash){
       if(err) {
@@ -149,8 +141,11 @@ app.post('/reg',(req,res)=>{
         console.log(err);
       } else {
         if(result.rows[0] !== undefined){
-      let url = loc+'?'+result.rows[0].user_id;
-      res.redirect(url)
+          let data ={
+            id:result.rows[0].user_id,
+            url:"./js/main.html"
+          }
+          res.send(data)
         }else {
           res.status(404).send("please check again")
             }
