@@ -36,7 +36,7 @@ padding: 5px;
 .tweet {
     color: red;
     border: blue 0.5px ridge;
-    margin: 5px auto 50px auto;
+    margin: 5px 20px 50px 20px;
     padding: 3px 10px 0px 10px;
 }
 
@@ -51,4 +51,8 @@ padding: 5px;
 
 #tweets {
     width: 40%;
+}
+
+#tweets-area {
+    margin: 0 auto;
 }
