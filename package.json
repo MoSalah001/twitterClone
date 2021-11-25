@@ -18,7 +18,7 @@
   "devDependencies": {
   },
   "scripts": {
-    "start": "node ./back.js",
+    "start": "node ./back.js"
   },
   "author": "MoSalah",
   "license": "ISC"
