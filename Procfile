@@ -1,1 +1,1 @@
-web: node ./back.js
+web: node -r dotenv/config ./back.js
