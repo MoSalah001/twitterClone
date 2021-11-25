@@ -6,6 +6,9 @@
 #tweet {
     display: flex;
     flex-direction: column;
+    width: 40%;
+    margin: 0 auto;
+    padding: 20px 0px 0px 0px;
 }
 
 h1 {
@@ -13,8 +16,8 @@ h1 {
 }
 
 #mb-3 {
-    width: 40%;
-    margin: 0 auto;
+    width: 97.75vw;
+    background-color: burlywood;
 }
 
 #button {
@@ -39,10 +42,13 @@ padding: 5px;
 
 .tweet p {
     border: yellow 2px solid;
-    margin: 0px 0px 0px 0px;
-    /* width: fit-content; */
+    margin: 0px 0px 5px 0px;
 }
 
 .users {
     width: fit-content;
+}
+
+#tweets {
+    width: 40%;
 }
