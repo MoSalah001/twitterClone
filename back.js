@@ -1,4 +1,4 @@
-const supabaseMD = require('@supabase/supabase-js')
+const myEnv = require('dotenv').config()
 
 const express = require('express');
 
@@ -21,6 +21,12 @@ var serverHost = process.env.HOST || '0.0.0.0'
 var serverPort = process.env.PORT || 3000
 
 let loc = 'https://twitter-draft-copy.herokuapp.com/'
+
+console.log(process.env.DB_HOST);
+console.log(process.env.DB_USER);
+console.log(process.env.DB_PASSWORD);
+console.log(process.env.DB_PORT);
+console.log(process.env.DB_NAME);
 
 const pool = new Pool({
   user:process.env.DB_USER,
