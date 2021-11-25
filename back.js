@@ -1,14 +1,26 @@
-const express = require('express');
+const supabaseMD = require('@supabase/supabase-js')
 
-const cors = require("cors")
+const express = require('express');
 
 const  { Pool }  = require("pg")
 
-const morgan = require("morgan")
+const path = require("path")
 
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const { pathToFileURL } = require('url');
+const { stringify } = require('querystring');
+const { json } = require('body-parser');
+const { LoaderTargetPlugin } = require('webpack');
+
+const uri = __dirname+'/public/js/'
 
 const saltRounds = 10
+
+var serverHost = process.env.HOST || '0.0.0.0'
+
+var serverPort = process.env.PORT || 3000
+
+let loc = 'https://twitter-draft-copy.herokuapp.com/'
 
 const pool = new Pool({
   user:"postgres",
@@ -20,13 +32,19 @@ const pool = new Pool({
 
 const app = express();
 
-app.listen(process.env.port || 3000);
+app.engine('html',require('ejs').renderFile)
 
-app.use(cors());
+app.use(express.static('public'))
 
-app.use(morgan("combined"))
+app.listen(serverPort,serverHost,function(){
+  console.log("listening on port %d",serverPort,serverHost);
+});
 
 app.use(express.json());
+
+app.get('/',(req,res)=>{
+  res.sendFile(uri+'index.html')
+})
 
 app.post('/feed',(req,res)=>{
   let id = req.body.id;
@@ -47,7 +65,7 @@ app.post('/feed',(req,res)=>{
 
 app.post('/user',(req,res) =>{
   let id = req.body.id
-  let loc = "http://localhost:5500/main.html";
+  loc+"/main.html";
   console.log(id);
   pool.connect()
   pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
@@ -79,37 +97,35 @@ app.post('/mew',(req,res)=>{
 
 app.post("/login",(req,res)=>{
   let uname = req.body.uname;
-  let password = req.body.pass;
-  let loc = "http://localhost:5500/main.html";
-  let pass = bcrypt.genSalt(saltRounds,function (err,salt){
-    bcrypt.hash(password,saltRounds,function(err,hash){
-      if(err) {
-        res.send(err)
-      } else {
-      pool.connect()
-      pool.query('SELECT * FROM users WHERE uname = $1 AND pass =$2',[uname, pass],(err, result)=> {
+  let password = req.body.pass.toString()
+
+ 
+  
+
+      pool.query('SELECT pass,user_id,uname FROM users WHERE uname = $1',[uname],(err, result)=> {;
       if (err) {
-        console.log(err);
+        res.status(404).send('you entered a wrong username, please try again');
       } else {
-        if(result.rows[0] !== undefined){
-      let url = loc+'?'+result.rows[0].user_id;
-      res.write((result.rows[0].user_id))
-      res.send()
-        }else {
-          res.status(404).send("wrong username or password please try again or create an account")
-            }
+        pass = result.rows[0].pass
+        bcrypt.compare(password,pass,(err,isMatch)=>{
+          if(err){
+            console.log(password);
+            res.status(404).send("you entered a wrong password, please try again")
+          }
+          if(isMatch) {
+            res.send(result.rows[0].user_id)
           }
         })
       }
     })
-  })
-})
+  }
+)
 
 app.post('/reg',(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
   let mail = req.body.mail;
-  let loc = "http://localhost:5500/main.html";
+  loc+"/main.html";
   let pass = bcrypt.genSalt(saltRounds,function (err,salt){
     bcrypt.hash(password,saltRounds,function(err,hash){
       if(err) {
@@ -142,9 +158,13 @@ app.put("/data",(req,res)=>{
   })
 })
 
-app.post("/getID",(req,res)=>{
-  let id = req.body;
-  let url = "http://localhost:5500/main.html?"
-  res.write(url+id.id)
-  res.send()
+app.get("/getHome",(req,res)=>{
+  res.redirect(loc+'./js/main.html')
 })
+
+
+app.get('/test',(req,res)=>{
+  console.log('got it too');
+res.render('./js/main.html',)
+})
+
