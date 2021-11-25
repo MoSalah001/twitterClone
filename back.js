@@ -14,10 +14,7 @@ const  { Pool }  = require("pg")
 const path = require("path")
 
 const bcrypt = require("bcrypt");
-const { pathToFileURL } = require('url');
-const { stringify } = require('querystring');
 const { json } = require('body-parser');
-const { LoaderTargetPlugin } = require('webpack');
 
 const uri = __dirname+'/public/js/'
 
