@@ -4,15 +4,13 @@ const http = new XMLHttpRequest();
 let btn = document.querySelector("#send")
 btn.addEventListener("click",sending)
 
-const backend = window.location.host
-
 function sending(e){
     e.preventDefault();
     var login = {
         uname : us.value,
         pass : ps.value
     }
-        http.open("POST",backend+"login")
+        http.open("POST","/login")
         http.setRequestHeader('content-type','application/json')
         http.send(JSON.stringify(login));
         http.onreadystatechange = function(){
