@@ -22,9 +22,7 @@ var serverHost = process.env.HOST || '0.0.0.0'
 
 var serverPort = process.env.PORT || 3000
 
-let loc = __dirname
-
-let directory ="../public/"
+let directory ="../"
 
 const pool = new Pool({
   user:process.env.DB_USER,
