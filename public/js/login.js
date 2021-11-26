@@ -4,7 +4,7 @@ const http = new XMLHttpRequest();
 let btn = document.querySelector("#send")
 btn.addEventListener("click",sending)
 
-const backend = process.env.HOST
+const backend = window.location.host
 
 function sending(e){
     e.preventDefault();
