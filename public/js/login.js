@@ -4,7 +4,7 @@ const http = new XMLHttpRequest();
 let btn = document.querySelector("#send")
 btn.addEventListener("click",sending)
 
-const backend = 'https://twitter-draft-copy.herokuapp.com/'
+const backend = process.env.HOST
 
 function sending(e){
     e.preventDefault();
