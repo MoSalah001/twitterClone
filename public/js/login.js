@@ -22,6 +22,7 @@ function sending(e){
                window.localStorage.setItem('ID',uid.id)
                return window.location = data.url
             } else {
+                console.log(this.readyState,this.status);
                 document.querySelector('#err').textContent =this.responseText
             }
         }

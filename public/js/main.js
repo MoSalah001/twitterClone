@@ -69,6 +69,7 @@ feeding.onreadystatechange=()=>{
             user.textContent = tweets[i].uname;
             user.classList.add('users')
             p.textContent =tweets[i].tweet; 
+            p.classList.add('posted-tweets'); 
             div.append(user)
             div.append(p)
             feed.append(div)
