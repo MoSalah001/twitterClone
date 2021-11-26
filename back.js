@@ -22,7 +22,7 @@ var serverHost = process.env.HOST || '0.0.0.0'
 
 var serverPort = process.env.PORT || 3000
 
-let loc = 'https://twitter-draft-copy.herokuapp.com/'
+let loc = `https://${window.location.host}\\`
 
 const pool = new Pool({
   user:process.env.DB_USER,
