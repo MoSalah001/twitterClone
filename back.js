@@ -110,7 +110,7 @@ app.post("/login",(req,res)=>{
         bcrypt.compare(password,pass,(err,isMatch)=>{
           if(err){
             console.log(err);
-            res.status(404).send("you entered a wrong password, please try again")
+            res.status(404).send("bcrypt check error")
           }
           else if(isMatch) {
             let data ={
@@ -119,7 +119,7 @@ app.post("/login",(req,res)=>{
             }
             res.send(data)
           }
-          if(!isMatch){
+          else if(!isMatch){
             res.status(404).send("you entered a wrong password, please try again")
           }
         })
