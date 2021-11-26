@@ -17,15 +17,14 @@ function sending(e){
         http.send(JSON.stringify(login));
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                console.log("first if");
                 let data = JSON.parse(this.response)
                 const uid = {id:data.id}
                window.localStorage.setItem('ID',uid.id)
                return window.location = data.url
             }
-            else if (this.status == 404) {
+            else if (this.readyState==4 && this.status == 404) {
                 console.log("first else if");
-                document.querySelector('#err').textContent =this.responseText
+                return document.querySelector('#err').textContent =this.responseText
             }
         }
     }
