@@ -4,11 +4,13 @@
 }
 
 body {
-    background-image: linear-gradient(200deg, goldenrod , red);
+    background-color: rgb(12,12,70) !important;
 }
 
 h1 {
     text-align: center;
+    color: rgb(11, 59, 192);
+    animation: glow 2s linear infinite;
 }
 
 #form {
@@ -32,4 +34,10 @@ h1 {
 
 #btn button {
     width: 100%;
+}
+
+@keyframes glow {
+    0%,100%{
+        text-shadow: 0 0 20px aqua;
+    }
 }
