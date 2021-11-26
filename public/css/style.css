@@ -4,6 +4,13 @@
 }
 body {
     background-color: rgb(11, 11, 24) !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 #tweet { /* text area tweet*/
@@ -21,7 +28,7 @@ h1 {
 }
 
 #mb-3 {
-    width: 97.75vw;
+    width: 100vw;
 }
 
 #button {
@@ -74,6 +81,6 @@ padding: 5px;
 
 
 .header {
-    width: 97.78vw;
+    width: 100vw;
     background-color: aqua;
 }
