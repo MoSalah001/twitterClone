@@ -4,8 +4,6 @@ const submit = document.getElementById('button')
 
 const username = document.getElementById("uname")
 
-const backend = 'https://twitter-draft-copy.herokuapp.com/'
-
 const un_get = new XMLHttpRequest()
 
 const feeding = new XMLHttpRequest();
@@ -14,7 +12,7 @@ const uid = {
     id:window.localStorage.getItem('ID')
 }
 
-un_get.open('POST',backend+'user')
+un_get.open('POST','/user')
 un_get.setRequestHeader('content-type','application/json')
 un_get.send(JSON.stringify(uid));
 un_get.onreadystatechange = ()=>{
@@ -39,7 +37,7 @@ function send() {
         user : uid.id,
     }
     
-    http.open('POST',backend+'mew',true)
+    http.open('POST','/mew',true)
 
     http.setRequestHeader('content-type','application/json')
 
@@ -54,7 +52,7 @@ function send() {
 }
 
 
-feeding.open("POST",backend+"feed");
+feeding.open("POST","/feed");
 feeding.setRequestHeader('content-type','application/json')
 feeding.send(JSON.stringify(uid))
 feeding.onreadystatechange=()=>{
