@@ -118,7 +118,7 @@ app.post("/login",(req,res)=>{
               id:result.rows[0].user_id,
               url:loc+'./js/main.html'
             }
-            res.send(data)
+            res.status(200).send(data)
           }
           else if(!isMatch){
             res.status(404).send("you entered a wrong password, please try again")
