@@ -45,24 +45,35 @@ padding: 5px;
     border-radius: 5px;
 }
 
-.tweet p { /* username  */
+.tweet p { /* posted tweets texts */
     border: rgb(83, 83, 230) 2px solid;
-    margin: 0px 0px 5px 0px;
-    padding: 5px;
     border-radius: 5px;
+    padding: 5px;
 }
 
-.users {
+.users { /* username  */
     width: fit-content;
 }
 
-#tweets { /* tweets area */ 
+.posted-tweets { /* main tweet content */
+    margin: 5px 0px 0px 0px;
+}
+
+#tweets { /* div tweets area */ 
     width: 40%;
     margin: 0 auto;
     background-color: rgb(17, 17, 83);
+
 }
 
-#tweets-area {
+#tweets-area { /* whole wide section */
     margin: 0 auto;
     width: 100%;
+}
+
+
+
+.header {
+    width: 97.78vw;
+    background-color: aqua;
 }

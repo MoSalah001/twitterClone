@@ -23,7 +23,6 @@ function sending(e){
                return window.location = data.url
             }
             else if (this.readyState==4 && this.status == 404) {
-                console.log("first else if");
                 return document.querySelector('#err').textContent =this.responseText
             }
         }
