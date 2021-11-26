@@ -105,8 +105,8 @@ app.post("/login",(req,res)=>{
       pool.query('SELECT pass,user_id,uname FROM users WHERE uname = $1',[uname],(err, result)=> {;
       if (err) {
         res.status(404).send('query based error');
-      } else if(!result.rows[0].pass) {
-        res.status(404).send('query based error');
+      } else if(!result.rows[0]) {
+        res.status(404).send("you entered a wrong username, please try again");
       } else if(result.rows[0].pass){
         pass = result.rows[0].pass
         bcrypt.compare(password,pass,(err,isMatch)=>{
