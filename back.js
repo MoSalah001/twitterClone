@@ -23,7 +23,8 @@ var serverHost = process.env.HOST || '0.0.0.0'
 var serverPort = process.env.PORT || 3000
 
 let loc = __dirname
-console.log(__dirname);
+
+let directory = loc +"/public"
 
 const pool = new Pool({
   user:process.env.DB_USER,
@@ -67,13 +68,13 @@ app.post('/feed',(req,res)=>{
 
 app.post('/user',(req,res) =>{
   let id = req.body.id
-  loc+"/main.html";
+  directory+"/main.html";
   pool.connect()
   pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
     if(result !== undefined){
     res.send(JSON.stringify(result.rows[0].uname))
     } else {
-      res.redirect(301,loc)
+      res.redirect(301,directory)
     }
   })
 })
@@ -88,7 +89,7 @@ app.post('/mew',(req,res)=>{
     if(err) {res.send(err);}
     else {
       if(result.rows[0] !== undefined) {           
-        let refresh = loc+'js/main.html';
+        let refresh = directory+'js/main.html';
         res.redirect(refresh)
           }
       }
@@ -117,7 +118,7 @@ app.post("/login",(req,res)=>{
           else if(isMatch) {
             let data ={
               id:result.rows[0].user_id,
-              url:loc+'./js/main.html'
+              url:directory+'./js/main.html'
             }
             res.status(200).send(data)
           }
@@ -134,7 +135,7 @@ app.post('/reg',(req,res)=>{
   let uname = req.body.uname;
   let password = req.body.pass;
   let mail = req.body.mail;
-  loc+"./js/main.html";
+  directory+"./js/main.html";
   let pass = bcrypt.genSalt(saltRounds,function (err,salt){
     bcrypt.hash(password,saltRounds,function(err,hash){
       if(err) {
@@ -171,5 +172,5 @@ app.put("/data",(req,res)=>{
 })
 
 app.post("/getHome",(req,res)=>{
-  res.redirect(loc+'./js/main.html')
+  res.redirect(directory+'./js/main.html')
 })
