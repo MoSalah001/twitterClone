@@ -109,13 +109,15 @@ app.post("/login",(req,res)=>{
         pass = result.rows[0].pass
         bcrypt.compare(password,pass,(err,isMatch)=>{
           if(err){
-            console.log(password);
             res.status(404).send("you entered a wrong password, please try again")
           }
           if(isMatch) {
             let data ={
               id:result.rows[0].user_id,
               url:loc+'./js/main.html'
+            }
+            if(!isMatch){
+              res.status(404).send("you entered a wrong password, please try again")
             }
             res.send(data)
           }
