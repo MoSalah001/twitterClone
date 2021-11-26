@@ -24,7 +24,7 @@ var serverPort = process.env.PORT || 3000
 
 let loc = __dirname
 
-let directory = loc +"/public/"
+let directory = loc+'/'
 
 const pool = new Pool({
   user:process.env.DB_USER,
