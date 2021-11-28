@@ -52,7 +52,6 @@ padding: 5px;
 }
 
 .tweet p { /* posted tweets texts */
-    display: inline-block;
     border: rgb(83, 83, 230) 2px solid;
     border-radius: 5px;
     padding: 5px;
@@ -63,10 +62,12 @@ padding: 5px;
 }
 
 .users { /* username  */
+    display: inline-block;
     width: fit-content;
 }
 
 .posted-tweets { /* main tweet content */
+    display: block;
     margin: 5px 0px 0px 0px;
 }
 
