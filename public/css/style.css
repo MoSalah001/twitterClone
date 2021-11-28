@@ -52,9 +52,14 @@ padding: 5px;
 }
 
 .tweet p { /* posted tweets texts */
+    display: inline-block;
     border: rgb(83, 83, 230) 2px solid;
     border-radius: 5px;
     padding: 5px;
+}
+
+#svg {
+    display: inline-block;
 }
 
 .users { /* username  */
