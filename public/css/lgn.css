@@ -17,7 +17,7 @@ h4 {
     color:cyan;
 }
 
-a {
+h4 a {
     text-decoration: none;
     color: rgb(241, 255, 47);
 }
@@ -61,5 +61,20 @@ a:hover {
     100% {
         text-shadow: none;
         color:rgb(11, 59, 192)
+    }
+}
+
+@keyframes glowing-link{
+    0%{
+        color: yellow;
+    }
+    34%{
+        color:greenyellow;
+    }
+    69%{
+        color: red;
+    }
+    100%{
+        color: orange;
     }
 }
