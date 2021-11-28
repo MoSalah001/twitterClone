@@ -1,4 +1,6 @@
-import {deleteTweet} from './tweetFunctions.mjs'
+import * as tweetDeleter from './tweetFunctions.mjs'
+
+console.log(tweetDeleter);
 
 const tweet = document.getElementById('content')
 
