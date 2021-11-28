@@ -1,4 +1,4 @@
-import {deleteTweet} from './tweetFunctions'
+import {deleteTweet} from './tweetFunctions.js'
 
 const tweet = document.getElementById('content')
 
