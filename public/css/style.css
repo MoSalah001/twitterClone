@@ -2,8 +2,8 @@
     margin : 0px;
     padding: 0px;
 }
-body {
-    background-color: rgb(11, 11, 24) !important;
+#body {
+    background-color: rgb(11, 11, 24);
     -ms-overflow-style: none;
     scrollbar-width: none;
     scroll-behavior: smooth;

@@ -32,11 +32,11 @@ submit.addEventListener('click', send)
 
 
 function send() {
+    if(tweet.value != ""){
     let tweeting = {
         body : tweet.value,
         user : uid.id,
     }
-    
     http.open('POST','/mew',true)
 
     http.setRequestHeader('content-type','application/json')
@@ -47,6 +47,7 @@ function send() {
     http.onreadystatechange = ()=>{
         if(http.readyState == 4 && http.status == 200){
             window.location=http.responseURL;
+            }
         }
     }
 }
@@ -62,6 +63,9 @@ feeding.onreadystatechange=()=>{
             let p = document.createElement('p');
             let user = document.createElement('p')
             let div = document.createElement('div')
+            let svg = document.createElement('span')
+            svg.textContent = '<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm0 10.293l5.293-5.293.707.707-5.293 5.293 5.293 5.293-.707.707-5.293-5.293-5.293 5.293-.707-.707 5.293-5.293-5.293-5.293.707-.707 5.293 5.293z"/></svg>'
+            svg.id('svg')
             div.id = tweets[i].tweet_id;
             div.classList.add('tweet')
             user.textContent = tweets[i].uname;
@@ -69,6 +73,7 @@ feeding.onreadystatechange=()=>{
             p.textContent =tweets[i].tweet; 
             p.classList.add('posted-tweets'); 
             div.append(user)
+            div.append(svg)
             div.append(p)
             feed.append(div)
         }
