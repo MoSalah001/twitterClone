@@ -1,3 +1,5 @@
+import {deleteTweet} from './tweetFunctions'
+
 const tweet = document.getElementById('content')
 
 const submit = document.getElementById('button')
