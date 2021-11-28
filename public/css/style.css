@@ -58,7 +58,14 @@ padding: 5px;
 }
 
 #svg {
-    display: inline-block;
+    float: right;
+    margin: 5px 5px 0 0;
+
+}
+
+#svg svg{
+    background-color: crimson;
+    border-radius: 50%;
 }
 
 .users { /* username  */
