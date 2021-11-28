@@ -1,5 +1,7 @@
 export function deleteTweet(){
-    let uid = window.localStorage.getItem("ID")
-    let tweetId = this
-    console.log(this);
+    let data = {
+        userID = window.localStorage.getItem("ID"),
+        tweetID = this.parentNode.parentNode.id
+    }
+    console.log(data);
 }
