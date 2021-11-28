@@ -96,3 +96,7 @@ padding: 5px;
     width: 100vw;
     background-color: aqua;
 }
+
+path {
+    fill: yellow;
+}
