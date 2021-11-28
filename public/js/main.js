@@ -11,10 +11,7 @@ const feeding = new XMLHttpRequest();
 const uid = {
     id:window.localStorage.getItem('ID')
 }
-/* for delete function */
-let deleteBtn = document.getElementById("deleteBtn")
-deleteBtn.addEventListener("click",deleteTweet())
-/* for delete function */
+
 un_get.open('POST','/user')
 un_get.setRequestHeader('content-type','application/json')
 un_get.send(JSON.stringify(uid));
