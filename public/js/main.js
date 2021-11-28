@@ -54,11 +54,6 @@ function send() {
     }
 }
 
-function addEventListenerToDeleteBtn(){
-    deleteBtn.addEventListener("click",deleteTweet)
-
-}
-
 feeding.open("POST","/feed");
 feeding.setRequestHeader('content-type','application/json')
 feeding.send(JSON.stringify(uid))
@@ -84,7 +79,7 @@ feeding.onreadystatechange=()=>{
             feed.append(div)
             let deleteBtn = document.getElementById("svg")
         }
-        addEventListenerToDeleteBtn()
+        deleteBtn.addEventListener("click",deleteTweet)
     }
 }
 
