@@ -77,7 +77,7 @@ feeding.onreadystatechange=()=>{
             div.append(svg)
             div.append(p)
             feed.append(div)
-            let deleteBtn = document.getElementById("svg")
+            var deleteBtn = document.getElementById("svg")
         }
         deleteBtn.addEventListener("click",deleteTweet)
     }
