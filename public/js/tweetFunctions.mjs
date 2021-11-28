@@ -3,5 +3,11 @@ export function deleteTweet(){
         userID : window.localStorage.getItem("ID"),
         tweetID : this.parentNode.id
     }
-    console.log(data);
+    let confirmation = confirm("Are you sure you want to delete this tweet? \\n You won't be able to undo this action")
+    if(confirmation) {
+        console.log('yes');
+    }
+    if(!confirmation) {
+        console.log('a7a');
+    }
 }
