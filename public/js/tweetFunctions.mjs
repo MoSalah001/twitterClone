@@ -5,7 +5,15 @@ export function deleteTweet(){
     }
     let confirmation = confirm("Are you sure you want to delete this tweet?" + "\\n" + "You won't be able to undo this action")
     if(confirmation) {
-        console.log('yes');
+        let http = new XMLHttpRequest()
+        http.open("post","/delete")
+        http.setRequestHeader("content-type","application/json")
+        http.send(JSON.stringify(data))
+        http.onreadystatechange = ()=>{
+            if(http.readyState == 4 && http.status == 200) {
+                location.reload()
+            }
+        }
     }
     if(!confirmation) {
         return null;

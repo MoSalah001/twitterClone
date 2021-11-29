@@ -172,3 +172,8 @@ app.put("/data",(req,res)=>{
 app.post("/getHome",(req,res)=>{
   res.redirect(directory+'./js/main.html')
 })
+
+app.post("/delete",(req,res)=>{
+  console.log(req.body);
+  //pool.query('DELETE FROM tweets WHERE user_id = $1 AND tweet_id = $2',[])
+})
