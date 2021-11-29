@@ -113,3 +113,11 @@ padding: 5px;
 path {
     fill: yellow;
 }
+
+
+
+/************** Style for Phone ******************/
+
+@media only screen and (max-width: 600px) {
+        
+}

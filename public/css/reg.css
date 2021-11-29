@@ -33,7 +33,6 @@ h4 a {
 #form {
     margin: 10px auto 20px auto;
     width: 30%;
-    background-color: rgb(0,0,0);
     background-color: rgba(255,255,255,.5);
     padding: 20px;
     border-radius: 10px;
@@ -84,4 +83,11 @@ h4 a {
     100%{
         color: yellow;
     }
+}
+
+
+@media only screen and (max-width: 600px) {
+    #form {
+        width: 70%;
+    }        
 }
