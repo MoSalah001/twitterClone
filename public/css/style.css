@@ -26,6 +26,18 @@ h1 {
     color: rgb(145, 95, 30);
 }
 
+#logo {
+    font-size: 20px;
+}
+
+#uname{
+    color: darkgoldenrod;
+}
+
+#username{
+    color: gold;
+}
+
 #mb-3 {
     width: 100vw;
 }

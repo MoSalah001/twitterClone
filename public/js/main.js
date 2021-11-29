@@ -4,7 +4,7 @@ const tweet = document.getElementById('content')
 
 const submit = document.getElementById('button')
 
-const username = document.getElementById("uname")
+const username = document.getElementById("username")
 
 const un_get = new XMLHttpRequest()
 
@@ -20,7 +20,7 @@ un_get.send(JSON.stringify(uid));
 un_get.onreadystatechange = ()=>{
     if(un_get.readyState == 4 && un_get.status == 200) {
         let str = JSON.parse(un_get.response)
-        username.textContent = `Hello, ${str}`
+        username.textContent = `${str}`
     }else if(!window.localStorage.ID){
         window.location = un_get.responseURL
     }
