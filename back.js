@@ -174,6 +174,15 @@ app.post("/getHome",(req,res)=>{
 })
 
 app.post("/delete",(req,res)=>{
-  console.log(req.body);
-  //pool.query('DELETE FROM tweets WHERE user_id = $1 AND tweet_id = $2',[])
+  let data = {
+    tweetID:req.body.tweetID,
+    userID:req.body.userID
+  }
+  pool.query('DELETE FROM tweets WHERE user_id = $1 AND tweet_id = $2',[data.userID,data.tweetID],(error,result)=>{
+    if(error) {
+      console.log(error);
+    } else {
+      res.status(200).send()
+    }
+  })
 })
