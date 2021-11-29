@@ -27,7 +27,7 @@ h1 {
 }
 
 #logo {
-    font-size: 80px;
+    font-size: 40px;
     color: cyan;
     text-align: left;
 }
@@ -108,7 +108,6 @@ padding: 5px;
 
 .header {
     width: 100vw;
-    background-color: rgb(17, 17, 83);
 }
 
 path {
