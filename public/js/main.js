@@ -14,6 +14,14 @@ const uid = {
     id:window.localStorage.getItem('ID')
 }
 
+function checkLocalStorage(){
+    if(window.localStorage.ID){
+        return null
+    } else {
+        un_get.open("GET","/logout")
+    }
+}
+
 un_get.open('POST','/user')
 un_get.setRequestHeader('content-type','application/json')
 un_get.send(JSON.stringify(uid));
@@ -85,5 +93,11 @@ feeding.onreadystatechange=()=>{
     }
 }
 
+/****************************** LOGOUT *******************************/
 
+let logout = document.getElementById("logout")
+logout.addEventListener("click",logoutFunction)
 
+function logoutFunction(){
+    window.localStorage.clear();
+}

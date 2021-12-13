@@ -114,6 +114,12 @@ path {
     fill: yellow;
 }
 
+#logout {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
 
 
 /************** Style for Phone ******************/

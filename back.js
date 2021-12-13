@@ -186,3 +186,9 @@ app.post("/delete",(req,res)=>{
     }
   })
 })
+
+
+app.get("/logout",(req,res,next)=>{
+  res.redirect("/")
+  next()
+})
