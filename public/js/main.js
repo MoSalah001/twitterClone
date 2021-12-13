@@ -100,4 +100,5 @@ logout.addEventListener("click",logoutFunction)
 
 function logoutFunction(){
     window.localStorage.clear();
+    checkLocalStorage();
 }
