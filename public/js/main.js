@@ -21,18 +21,19 @@ function checkLocalStorage(){
         un_get.open("GET","/logout")
     }
 }
-
-un_get.open('POST','/user')
-un_get.setRequestHeader('content-type','application/json')
-un_get.send(JSON.stringify(uid));
-un_get.onreadystatechange = ()=>{
-    if(un_get.readyState == 4 && un_get.status == 200) {
-        let str = JSON.parse(un_get.response)
-        username.textContent = `${str}`
-    }else if(!window.localStorage.ID){
-        window.location = un_get.responseURL
+//if(window.localStorage.ID){
+    un_get.open('POST','/user')
+    un_get.setRequestHeader('content-type','application/json')
+    un_get.send(JSON.stringify(uid));
+    un_get.onreadystatechange = ()=>{
+        if(un_get.readyState == 4 && un_get.status == 200) {
+            let str = JSON.parse(un_get.response)
+            username.textContent = `${str}`
+        }else if(!window.localStorage.ID){
+            window.location = un_get.responseURL
+        }
     }
-}
+//}
 
 const http = new XMLHttpRequest()
 
