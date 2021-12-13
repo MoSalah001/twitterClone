@@ -69,7 +69,7 @@ app.post('/user',(req,res) =>{
   directory+"/main.html";
   pool.connect()
   pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
-    if(result !== undefined || result.rowCount > 0 || result.rows[0].uname !== undefined){
+    if(result !== undefined && result.rowCount > 0){
     res.send(JSON.stringify(result.rows[0].uname))
     } else {
       res.redirect(301,directory)
