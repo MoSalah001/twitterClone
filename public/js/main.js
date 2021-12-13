@@ -21,7 +21,6 @@ function checkLocalStorage(){
         un_get.open("GET","/logout")
     }
 }
-//if(window.localStorage.ID){
     un_get.open('POST','/user')
     un_get.setRequestHeader('content-type','application/json')
     un_get.send(JSON.stringify(uid));
@@ -33,7 +32,6 @@ function checkLocalStorage(){
             window.location = un_get.responseURL
         }
     }
-//}
 
 const http = new XMLHttpRequest()
 
