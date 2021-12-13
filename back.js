@@ -189,6 +189,6 @@ app.post("/delete",(req,res)=>{
 
 
 app.get("/logout",(req,res,next)=>{
-  res.redirect("/")
+  res.redirect(301,serverHost)
   next()
 })
