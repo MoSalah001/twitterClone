@@ -69,7 +69,7 @@ app.post('/user',(req,res) =>{
   directory+"/main.html";
   pool.connect()
   pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
-    if(result !== undefined){
+    if(result !== undefined || result.rows[0] !== undefined){
       console.log(result);
     res.send(JSON.stringify(result.rows[0].uname))
     } else {
