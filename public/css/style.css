@@ -125,5 +125,11 @@ path {
 /************** Style for Phone ******************/
 
 @media only screen and (max-width: 600px) {
-        
+    #tweets {
+        width : 80%;
+    }
+
+    #tweet {
+        width: 80%;
+    }
 }
