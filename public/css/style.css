@@ -120,6 +120,10 @@ path {
     top: 1rem;
 }
 
+#err {
+    color:rgb(248, 58, 58);
+}
+
 
 
 /************** Style for Phone ******************/
