@@ -146,7 +146,7 @@ app.post('/reg',(req,res)=>{
         if(result.rows[0] !== undefined){
           let data ={
             id:result.rows[0].user_id,
-            url:"./js/main.html"
+            url:directory+"./js/main.html"
           }
           res.send(data)
         }else {
