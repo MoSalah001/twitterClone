@@ -25,7 +25,7 @@ function sending(e){
                     id:respnd.id,
                     url:respnd.url
                 }
-                window.localStorage.setItem(ID,data.id)
+                window.localStorage.setItem("ID",data.id)
                 return window.location = data.url
             } else {
                 document.getElementById('err').innerText = this.response
