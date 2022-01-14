@@ -4,22 +4,6 @@ const envo = myEnv.config()
 if (envo.error){
   throw envo.error
 }
-/*
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAOHUfQcfmiV0lo-h6Hx-C4RzvV5EgSFc0",
-  authDomain: "twittercopy-001.firebaseapp.com",
-  projectId: "twittercopy-001",
-  storageBucket: "twittercopy-001.appspot.com",
-  messagingSenderId: "791732013442",
-  appId: "1:791732013442:web:fb7fbd98f921db02c1679b",
-  measurementId: "G-4GMKH3M28R"
-};
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-*/
 
 const express = require('express');
 
@@ -41,11 +25,10 @@ var serverPort = process.env.PORT || 3000
 let directory ="../"
 
 const pool = new Pool({
-  user:process.env.DB_USER,
-  password:process.env.DB_PASSWORD,
-  host:process.env.DB_HOST,
-  port:process.env.DB_PORT,
-  database:process.env.DB_NAME
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const app = express();
