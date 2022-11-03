@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitter</title>
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <script type="module" src="./public/js/class.mjs"></script>
+    <script type="module" src="./class.mjs"></script>
+    <script type="module" src="./tweetFunctions.mjs"></script>
 </head>
-<body>
-    <h1 class="display-1">Twitter clone</h1>
-    <h1 class="display-1" id="uname"></h1>
+<body id="body">
+  <section class="header">
+    <h1 class="display-1" id="logo">Twitter clone</h1>
+    <input type="button" value="Logout" id="logout" class="btn btn-primary">
+    <h1 class="display-1" id="uname">Hello,<span id="username"></span></h1>
+  </section>
     <div id="mb-3">
         <section id="tweet">
             <textarea type="text" name="" id="content" class="form-control" rows="3"></textarea>
@@ -23,11 +27,11 @@
             Loading...
           </button>
         </div>
-        <section>
+        <section id="tweets-area">
           <div id="tweets">
           </div>
         </section>
     </div>
-<script type="module" src="/public/js/main.js"></script>
+<script type="module" src="./main.js"></script>
 </body>
 </html>

@@ -1,12 +1,11 @@
 export default function tweeta(){
     let un_url = document.URL
-    let i =un_url.search("html")
     let origin = document.querySelector('#tweets')
     let div = document.createElement("div")
     let h4 = document.createElement('h4')
     let p = document.createElement('p')
-i ={
-    id:un_url.slice(i+5)
+let i ={
+    id:window.localStorage.getItem(ID)
 }
 let tweet = class {
     constructor(div, h4, p, text, user, id, origin) {
@@ -20,7 +19,7 @@ let tweet = class {
     }
 }
 let http = new XMLHttpRequest()
-http.open("PUT","http://localhost:3000/data",true)
+http.open("PUT","/data",true)
 http.setRequestHeader('content-type','application/json')
 http.send(JSON.stringify(i))
 http.onreadystatechange = () =>{

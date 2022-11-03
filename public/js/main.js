@@ -1,30 +1,38 @@
+import {deleteTweet} from './tweetFunctions.mjs'
+
 const tweet = document.getElementById('content')
 
 const submit = document.getElementById('button')
 
-const username = document.getElementById("uname")
+const username = document.getElementById("username")
 
 const un_get = new XMLHttpRequest()
 
 const feeding = new XMLHttpRequest();
 
-let un_url = document.URL
-
-let i =un_url.search("html")
-i ={
-    id:un_url.slice(i+5)
+const uid = {
+    id:window.localStorage.getItem('ID')
 }
-un_get.open('POST','http://localhost:3000/user')
-un_get.setRequestHeader('content-type','application/json')
-un_get.send(JSON.stringify(i));
-un_get.onreadystatechange = ()=>{
-    if(un_get.readyState == 4 && un_get.status == 200) {
-        let str = JSON.parse(un_get.response)
-        username.textContent = `Hello, ${str}`
-    }else if(i.id < 1){
-        window.location = un_get.responseURL
+
+function checkLocalStorage(){
+    if(window.localStorage.ID){
+        return null
+    } else {
+        un_get.open("GET","/logout")
     }
 }
+    un_get.open('POST','/user')
+    un_get.setRequestHeader('content-type','application/json')
+    un_get.send(JSON.stringify(uid));
+    un_get.onreadystatechange = ()=>{
+        if(un_get.readyState == 4 && un_get.status == 200) {
+            let str = JSON.parse(un_get.response)
+            username.textContent = `${str}`
+        }else if(!window.localStorage.ID){
+            window.location = un_get.responseURL
+        }
+    }
+
 const http = new XMLHttpRequest()
 
 const feed = document.getElementById('tweets')
@@ -33,12 +41,12 @@ submit.addEventListener('click', send)
 
 
 function send() {
+    if(tweet.value != ""){
     let tweeting = {
         body : tweet.value,
-        user : i,
+        user : uid.id,
     }
-    
-    http.open('POST','http://localhost:3000/mew',true)
+    http.open('POST','/mew',true)
 
     http.setRequestHeader('content-type','application/json')
 
@@ -47,15 +55,15 @@ function send() {
     
     http.onreadystatechange = ()=>{
         if(http.readyState == 4 && http.status == 200){
-            window.location=http.responseURL+`?${i.id}`;
+            window.location=http.responseURL;
+            }
         }
     }
 }
 
-
-feeding.open("POST","http://localhost:3000/feed");
+feeding.open("POST","/feed");
 feeding.setRequestHeader('content-type','application/json')
-feeding.send(JSON.stringify(i))
+feeding.send(JSON.stringify(uid))
 feeding.onreadystatechange=()=>{
     if(feeding.readyState == 4 && feeding.status == 200) {
         let tweets = JSON.parse(feeding.responseText);
@@ -63,18 +71,33 @@ feeding.onreadystatechange=()=>{
             let p = document.createElement('p');
             let user = document.createElement('p')
             let div = document.createElement('div')
+            let svg = document.createElement('span')
+            svg.innerHTML = '<svg id="deleteBtn" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M12 0c6.623 0 12 5.377 12 12s-5.377 12-12 12-12-5.377-12-12 5.377-12 12-12zm0 1c6.071 0 11 4.929 11 11s-4.929 11-11 11-11-4.929-11-11 4.929-11 11-11zm0 10.293l5.293-5.293.707.707-5.293 5.293 5.293 5.293-.707.707-5.293-5.293-5.293 5.293-.707-.707 5.293-5.293-5.293-5.293.707-.707 5.293 5.293z"/></svg>'
+            svg.id = 'svg'
             div.id = tweets[i].tweet_id;
             div.classList.add('tweet')
             user.textContent = tweets[i].uname;
+            user.classList.add('users')
             p.textContent =tweets[i].tweet; 
+            p.classList.add('posted-tweets'); 
             div.append(user)
+            div.append(svg)
             div.append(p)
             feed.append(div)
         }
-    } else {
-        console.log('check again');
+        let deleteBtn = document.querySelectorAll("#svg")
+        for(let i = 0; i < deleteBtn.length;i++){
+        deleteBtn[i].addEventListener("click",deleteTweet)
+        }
     }
 }
 
+/****************************** LOGOUT *******************************/
 
+let logout = document.getElementById("logout")
+logout.addEventListener("click",logoutFunction)
 
+function logoutFunction(){
+    window.localStorage.clear();
+    checkLocalStorage();
+}

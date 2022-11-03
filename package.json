@@ -2,6 +2,7 @@
   "name": "twitter",
   "version": "1.0.0",
   "description": "twitter clone",
+<<<<<<< HEAD
   "main": "TwitterClone",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -16,6 +17,28 @@
   "scripts": {
     "test": "nodemon back.js",
     "start":"node ~/public/js/back.js"
+=======
+  "engines": {
+    "node": "14.x"
+  },
+  "main": "TwitterClone",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "firebase": "^9.6.1",
+    "pg": "^8.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+<<<<<<<< HEAD:package.json
+    "start": "node ./back.js"
+========
+    "test": "nodemon /public/js/back.js"
+>>>>>>>> 4c4c6741fdb65992a16c124af384007f0d40d58b:public/js/package.json
+>>>>>>> 4c4c6741fdb65992a16c124af384007f0d40d58b
   },
   "author": "MoSalah",
   "license": "ISC"

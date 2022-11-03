@@ -15,12 +15,18 @@ function sending(e){
         pass : ps.value,
         mail: ml.value
     }
-        http.open("POST","http://localhost:3000/reg")
+        http.open("POST","/reg")
         http.setRequestHeader('content-type','application/json')
         http.send(JSON.stringify(reg));
         http.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-                window.location = this.responseURL
+                let respnd = JSON.parse(this.response)
+                let data = {
+                    id:respnd.id,
+                    url:respnd.url
+                }
+                window.localStorage.setItem("ID",data.id)
+                return window.location = data.url
             } else {
                 document.getElementById('err').innerText = this.response
             }
