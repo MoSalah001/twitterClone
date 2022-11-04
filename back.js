@@ -1,9 +1,10 @@
 const myEnv = require('dotenv')
-
+/*
 const envo = myEnv.config()
 if (envo.error){
   throw envo.error
 }
+*/
 
 const express = require('express');
 
