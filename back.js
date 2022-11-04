@@ -19,7 +19,7 @@ const uri = __dirname+'/public/js/'
 
 const saltRounds = 10
 
-var serverHost = process.env.HOST || '127.0.0.1'
+var serverHost = process.env.HOST || '0.0.0.0'
 
 var serverPort = process.env.PORT || 3000
 
