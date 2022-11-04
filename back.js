@@ -18,17 +18,18 @@ const uri = __dirname+'/public/js/'
 
 const saltRounds = 10
 
-var serverHost = process.env.HOST || '0.0.0.0'
+var serverHost = process.env.HOST || '127.0.0.1'
 
 var serverPort = process.env.PORT || 3000
 
 let directory ="../"
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  host: process.env.DB_HOST ,
+  user: process.env.DB_USER,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port:process.env.DB_PORT
 });
 
 const app = express();
@@ -48,11 +49,11 @@ app.get('/',(req,res)=>{
 })
 
 app.post('/feed',(req,res)=>{
-  let id = req.body.id;
+  let uname = req.body.user;
   pool.connect();
-  pool.query('SELECT * FROM tweets WHERE user_id = $1',[id],(err,result)=>{
+  pool.query('SELECT * FROM tweets WHERE tweet_author = $1',[uname],(err,result)=>{
     if(err) {
-      console.log(err);
+      res.send(err);
     } else {
       let tweets = [];
       for(let i=0; i < result.rows.length; i++) {
@@ -63,11 +64,11 @@ app.post('/feed',(req,res)=>{
   })
 })
 
-app.post('/user',(req,res) =>{
-  let id = req.body.id
+app.post('/user',(req,res) =>{ // getting username from DB 
+  let uname = req.body.user
   directory+"/main.html";
   pool.connect()
-  pool.query('SELECT uname FROM users WHERE user_id = $1',[id],(err, result)=>{
+  pool.query('SELECT uname FROM users WHERE uname = $1',[uname],(err, result)=>{
     if(result !== undefined && result.rowCount > 0){
     res.send(JSON.stringify(result.rows[0].uname))
     } else {
@@ -80,12 +81,12 @@ app.post('/mew',(req,res)=>{
   let tweet = req.body.body
   let user = req.body.user
   pool.connect()
-  pool.query("SELECT uname FROM users WHERE user_id = $1",[user],(err, result)=>{
+  pool.query("SELECT uname , un_id FROM users WHERE uname = $1",[user],(err, result)=>{
    var userName = result.rows[0].uname;
-  pool.query("INSERT INTO tweets(tweet,user_id,uname) VALUES($1, $2, $3) RETURNING *",[tweet, user, userName],(err, result)=>{
+  pool.query("INSERT INTO tweets(tweet_body,tweet_author,tweettime) VALUES($1, $2, $3) RETURNING *",[tweet, userName,Date()],(err, result)=>{
     if(err) {res.send(err);}
     else {
-      if(result.rows[0] !== undefined) {           
+      if(result.rows[0] !== undefined) {        
         let refresh = directory+'js/main.html';
         res.redirect(refresh)
           }
@@ -95,13 +96,11 @@ app.post('/mew',(req,res)=>{
 })
 
 app.post("/login",(req,res)=>{
+  // getting typed username and password for auth from DB;
   let uname = req.body.uname;
   let password = req.body.pass.toString()
 
- 
-  
-
-      pool.query('SELECT pass,user_id,uname FROM users WHERE uname = $1',[uname],(err, result)=> {;
+      pool.query('SELECT pass,uname FROM users WHERE uname = $1',[uname],(err, result)=> {;
       if (err) {
         res.status(404).send('query based error');
       } else if(!result.rows[0]) {
@@ -114,7 +113,7 @@ app.post("/login",(req,res)=>{
           }
           else if(isMatch) {
             let data ={
-              id:result.rows[0].user_id,
+              user:result.rows[0].uname,
               url:directory+'./js/main.html'
             }
             res.status(200).send(data)
@@ -133,19 +132,19 @@ app.post('/reg',(req,res)=>{
   let password = req.body.pass;
   let mail = req.body.mail;
   directory+"./js/main.html";
-  let pass = bcrypt.genSalt(saltRounds,function (err,salt){
+  bcrypt.genSalt(saltRounds,function (err,salt){
     bcrypt.hash(password,saltRounds,function(err,hash){
       if(err) {
         res.send(err)
       }else {
       pool.connect()
-      pool.query('INSERT INTO users(uname,pass,email) VALUES ($1, $2, $3) RETURNING *',[uname, hash, mail],(err, result)=> {
+      pool.query('INSERT INTO users(uname,pass,email,joinDate) VALUES ($1, $2, $3, $4) RETURNING *',[uname, hash, mail,Date()],(err, result)=> {
       if (err) {
         console.log(err);
       } else {
         if(result.rows[0] !== undefined){
           let data ={
-            id:result.rows[0].user_id,
+            uname:result.rows[0].uname,
             url:directory+"./js/main.html"
           }
           res.send(data)
@@ -160,7 +159,7 @@ app.post('/reg',(req,res)=>{
 })
 
 app.put("/data",(req,res)=>{
-  pool.query("SELECT tweet,uname,tweet_id,user_id FROM tweets WHERE user_id = $1",[req.body.id],(err,ressult)=>{
+  pool.query("SELECT tweet,tweet_author,tweet_id FROM tweets WHERE tweet_author = $1",[req.body.user],(err,ressult)=>{
     if(err){ console.log(err);}
     else {
       res.send(ressult.rows)

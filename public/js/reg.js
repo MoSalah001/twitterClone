@@ -22,10 +22,10 @@ function sending(e){
             if(this.readyState == 4 && this.status == 200){
                 let respnd = JSON.parse(this.response)
                 let data = {
-                    id:respnd.id,
+                    uname:respnd.uname,
                     url:respnd.url
                 }
-                window.localStorage.setItem("ID",data.id)
+                window.localStorage.setItem("uname",data.uname)
                 return window.location = data.url
             } else {
                 document.getElementById('err').innerText = this.response

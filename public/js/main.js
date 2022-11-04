@@ -10,12 +10,13 @@ const un_get = new XMLHttpRequest()
 
 const feeding = new XMLHttpRequest();
 
-const uid = {
-    id:window.localStorage.getItem('ID')
+const uname = {
+    user:window.localStorage.getItem('uname')
 }
 
+
 function checkLocalStorage(){
-    if(window.localStorage.ID){
+    if(window.localStorage.uname){
         return null
     } else {
         un_get.open("GET","/logout")
@@ -23,12 +24,12 @@ function checkLocalStorage(){
 }
     un_get.open('POST','/user')
     un_get.setRequestHeader('content-type','application/json')
-    un_get.send(JSON.stringify(uid));
+    un_get.send(JSON.stringify(uname));
     un_get.onreadystatechange = ()=>{
         if(un_get.readyState == 4 && un_get.status == 200) {
             let str = JSON.parse(un_get.response)
             username.textContent = `${str}`
-        }else if(!window.localStorage.ID){
+        }else if(!window.localStorage.uname){
             window.location = un_get.responseURL
         }
     }
@@ -44,7 +45,7 @@ function send() {
     if(tweet.value != ""){
     let tweeting = {
         body : tweet.value,
-        user : uid.id,
+        user : uname.user,
     }
     http.open('POST','/mew',true)
 
@@ -63,7 +64,7 @@ function send() {
 
 feeding.open("POST","/feed");
 feeding.setRequestHeader('content-type','application/json')
-feeding.send(JSON.stringify(uid))
+feeding.send(JSON.stringify(uname))
 feeding.onreadystatechange=()=>{
     if(feeding.readyState == 4 && feeding.status == 200) {
         let tweets = JSON.parse(feeding.responseText);
@@ -76,9 +77,9 @@ feeding.onreadystatechange=()=>{
             svg.id = 'svg'
             div.id = tweets[i].tweet_id;
             div.classList.add('tweet')
-            user.textContent = tweets[i].uname;
+            user.textContent = tweets[i].tweet_author;
             user.classList.add('users')
-            p.textContent =tweets[i].tweet; 
+            p.textContent =tweets[i].tweet_body; 
             p.classList.add('posted-tweets'); 
             div.append(user)
             div.append(svg)
