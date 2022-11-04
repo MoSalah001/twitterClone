@@ -1,9 +1,9 @@
 export function deleteTweet(){
     let data = {
-        userID : window.localStorage.getItem("ID"),
+        userName : window.localStorage.getItem("uname"),
         tweetID : this.parentNode.id
     }
-    let confirmation = confirm("Are you sure you want to delete this tweet?" + "\\n" + "You won't be able to undo this action")
+    let confirmation = confirm("Are you sure you want to delete this tweet?" + "\n" + "You won't be able to undo this action")
     if(confirmation) {
         let http = new XMLHttpRequest()
         http.open("post","/delete")
