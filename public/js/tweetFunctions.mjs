@@ -1,7 +1,7 @@
 export function deleteTweet(){
     let data = 
     {
-        userName : window.localStorage.getItem("uname"),
+        userName : document.cookie,
         tweetID : this.parentNode.id
     }
     let confirmation = confirm("Are you sure you want to delete this tweet?" + "\n" + "You won't be able to undo this action")
@@ -15,7 +15,7 @@ export function deleteTweet(){
         {
             if(http.readyState == 4 && http.status == 200) 
             {
-                location.reload()
+                window.location.reload();
             }
         }
     }
