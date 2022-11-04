@@ -7,31 +7,41 @@ const http = new XMLHttpRequest();
 let btn = document.querySelector("#send")
 btn.addEventListener("click",sending)
 
-function sending(e){
+function sending(e)
+{
     e.preventDefault();
-    if(ps.value === pschk.value && ml.value === mlchk.value && us !=""){
-    var reg = {
-        uname : us.value,
-        pass : ps.value,
-        mail: ml.value
-    }
+    if(ps.value === pschk.value && ml.value === mlchk.value && us !="")
+    {
+        var reg = 
+        {
+            uname : us.value,
+            pass : ps.value,
+            mail: ml.value
+        }
         http.open("POST","/reg")
         http.setRequestHeader('content-type','application/json')
         http.send(JSON.stringify(reg));
-        http.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
+        http.onreadystatechange = function()
+        {
+            if(this.readyState == 4 && this.status == 200)
+            {
                 let respnd = JSON.parse(this.response)
-                let data = {
+                let data = 
+                {
                     uname:respnd.uname,
                     url:respnd.url
                 }
                 window.localStorage.setItem("uname",data.uname)
                 return window.location = data.url
-            } else {
+            } 
+            else 
+            {
                 document.getElementById('err').innerText = this.response
             }
         }
-}else {
-    document.getElementById('err').innerText ="Please complete all fields"
-}
+    }
+    else 
+    {
+        document.getElementById('err').innerText ="Please complete all fields"
+    }
 }
