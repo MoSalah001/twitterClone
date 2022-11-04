@@ -19,6 +19,6 @@
   },
   "scripts": {
     "test": "nodemon back.js",
-    "start": "node ~/public/js/back.js"
+    "start": "node back.js"
   }
 }
