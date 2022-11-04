@@ -175,9 +175,9 @@ app.post("/getHome",(req,res)=>{
 app.post("/delete",(req,res)=>{
   let data = {
     tweetID:req.body.tweetID,
-    userID:req.body.userID
+    uname:req.body.userName
   }
-  pool.query('DELETE FROM tweets WHERE user_id = $1 AND tweet_id = $2',[data.userID,data.tweetID],(error,result)=>{
+  pool.query('DELETE FROM tweets WHERE tweet_author = $1 AND tweet_id = $2',[data.uname,data.tweetID],(error,result)=>{
     if(error) {
       console.log(error);
     } else {
