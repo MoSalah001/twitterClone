@@ -1,11 +1,11 @@
 const myEnv = require('dotenv')
 
-/*** only for developement purpose to get secret credintals from env files in a local environment
+/*** only for developement purpose to get secret credintals from env files in a local environment*/
 const envo = myEnv.config()
 if (envo.error){
   throw envo.error
 }
-****/
+/****/
 
 
 const express = require('express');
@@ -44,8 +44,8 @@ app.engine('html',require('ejs').renderFile)
 
 app.use(express.static('./public'))
 
-//const cors = require('cors');   //only for developement purpose
-//app.use(cors());                //only for developement purpose
+const cors = require('cors');   //only for developement purpose
+app.use(cors());                //only for developement purpose
 
 app.listen(serverPort,serverHost,function()
 {
