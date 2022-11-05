@@ -17,7 +17,7 @@ const path = require("path")
 const bcrypt = require("bcrypt");
 const { json } = require('body-parser');
 
-const uri = __dirname+'/public/js/'
+const uri = __dirname+'/'
 
 const saltRounds = 10
 
@@ -42,7 +42,7 @@ const app = express();
 
 app.engine('html',require('ejs').renderFile)
 
-app.use(express.static('public'))
+app.use(express.static('.'))
 
 //const cors = require('cors');   //only for developement purpose
 //app.use(cors());                //only for developement purpose
@@ -84,7 +84,7 @@ app.post('/feed',(req,res)=>
 app.post('/user',(req,res) => // getting username from DB 
 { 
   let uname = req.body.user
-  directory+"/main.html";
+  directory+"main.html";
   pool.connect()
   pool.query('SELECT uname FROM users WHERE uname = $1',[uname],(err, result)=>
   {
@@ -117,7 +117,7 @@ app.post('/mew',(req,res)=>
       {
         if(result.rows[0] !== undefined) 
         {        
-          let refresh = directory+'js/main.html';
+          let refresh = directory+'./main.html';
           res.redirect(refresh)
         }
       }
@@ -154,7 +154,7 @@ app.post("/login",(req,res)=> // getting typed username and password for auth fr
             let data =
             {
               user:result.rows[0].uname,
-              url:directory+'./js/main.html'
+              url:directory+'./main.html'
             }
             res.status(200).send(data)
           }
@@ -173,7 +173,7 @@ app.post('/reg',(req,res)=>
   let uname = req.body.uname;
   let password = req.body.pass;
   let mail = req.body.mail;
-  directory+"./js/main.html";
+  directory+"./main.html";
   bcrypt.genSalt(saltRounds,function (err,salt)
   {
     bcrypt.hash(password,saltRounds,function(err,hash)
@@ -198,7 +198,7 @@ app.post('/reg',(req,res)=>
               let data =
               {
                 uname:result.rows[0].uname,
-                url:directory+"./js/main.html"
+                url:directory+"./main.html"
               }
               res.send(data)
             }
@@ -230,7 +230,7 @@ app.put("/data",(req,res)=>
 
 app.post("/getHome",(req,res)=>
 {
-  res.redirect(directory+'./js/main.html')
+  res.redirect(directory+'./main.html')
 })
 
 app.post("/delete",(req,res)=>
