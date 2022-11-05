@@ -42,7 +42,7 @@ const app = express();
 
 app.engine('html',require('ejs').renderFile)
 
-app.use(express.static('.'))
+app.use(express.static('./public'))
 
 //const cors = require('cors');   //only for developement purpose
 //app.use(cors());                //only for developement purpose
