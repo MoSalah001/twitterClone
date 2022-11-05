@@ -2,9 +2,10 @@
     "version": 2,
     "name": "Twitter Clone",
     "builds": [
-       { "src": "back.js", "use": "@vercel/node" }
+        { "src": "*.html", "use": "@vercel/static" },
+        { "src": "back.js", "use": "@vercel/node" }
     ],
     "routes": [
-       { "src": "/(.*)", "dest": "/app.js" }
+       { "src": "/(.*)", "dest": "/back.js" }
     ]
  }
