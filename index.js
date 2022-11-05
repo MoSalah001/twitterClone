@@ -42,10 +42,10 @@ const app = express();
 
 app.engine('html',require('ejs').renderFile)
 
-app.use(express.static('./public'))
+app.use('/static', express.static(path.join(__dirname + '/public')));
 
-//const cors = require('cors');   //only for developement purpose
-//app.use(cors());                //only for developement purpose
+// const cors = require('cors');   //only for developement purpose
+// app.use(cors());                //only for developement purpose
 
 app.listen(serverPort,serverHost,function()
 {

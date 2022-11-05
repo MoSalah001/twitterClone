@@ -5,10 +5,6 @@
   "main": "TwitterClone",
   "author": "MoSalah",
   "license": "ISC",
-  "engines": {
-    "node": "14.x",
-    "npm": "6.14.10"
-  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
@@ -22,7 +18,7 @@
     "nodemon": "^2.0.7"
   },
   "scripts": {
-    "test": "nodemon back.js",
-    "start": "node back.js"
+    "test": "nodemon ./index.js",
+    "start": "node ./index.js"
   }
 }
