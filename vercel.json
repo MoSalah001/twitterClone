@@ -1,0 +1,7 @@
+{
+    "version": 1.0,
+    "name": "Twitter Clone",
+    "builds": [
+       { "src": "back.js", "use": "@vercel/node" }
+    ]
+ }
