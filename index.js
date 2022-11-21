@@ -1,11 +1,10 @@
 const myEnv = require('dotenv')
-
-/*** only for developement purpose to get secret credintals from env files in a local environment
+/*** only for developement purpose to get secret credintals from env files in a local environment*/
 const envo = myEnv.config()
 if (envo.error){
   throw envo.error
 }
-****/
+/****/
 
 
 const express = require('express');
@@ -21,7 +20,7 @@ const uri = __dirname+'/'
 
 const saltRounds = 10
 
-var serverHost = process.env.HOST || '0.0.0.0'
+var serverHost = process.env.HOST || '127.0.0.1' || '0.0.0.0'
 
 var serverPort = process.env.PORT || 3000
 
@@ -49,7 +48,7 @@ app.use(express.static('./public'))
 
 app.listen(serverPort,serverHost,function()
 {
-  console.log("listening on port %d",serverPort,serverHost);
+  console.log(`listening on http://${serverHost}:${serverPort}`);
 });
 
 app.use(express.json());
