@@ -1,9 +1,10 @@
 const myEnv = require('dotenv')
-/*** only for developement purpose to get secret credintals from env files in a local environment
+/*** only for developement purpose to get secret credintals from env files in a local environment 
 const envo = myEnv.config()
 if (envo.error){
   throw envo.error
 }
+
 ****/
 
 
@@ -11,10 +12,7 @@ const express = require('express');
 
 const  { Pool }  = require("pg")
 
-const path = require("path")
-
 const bcrypt = require("bcrypt");
-const { json } = require('body-parser');
 
 const uri = __dirname+'/'
 
@@ -58,7 +56,7 @@ app.get('/',(req,res)=>
   res.sendFile(uri+'index.html')
 })
 
-app.post('/feed',(req,res)=>
+app.post('/feed',(req,res)=> // get user tweets on login 
 {
   let uname = req.body.user;
   pool.connect();
@@ -98,7 +96,7 @@ app.post('/user',(req,res) => // getting username from DB
   })
 })
 
-app.post('/mew',(req,res)=>
+app.post('/mew',(req,res)=> // post a new tweet
 {
   let tweet = req.body.body
   let user = req.body.user
@@ -167,7 +165,7 @@ app.post("/login",(req,res)=> // getting typed username and password for auth fr
   }
 )
 
-app.post('/reg',(req,res)=>
+app.post('/reg',(req,res)=> // register a new user
 {
   let uname = req.body.uname;
   let password = req.body.pass;
@@ -212,9 +210,9 @@ app.post('/reg',(req,res)=>
   })
 })
 
-app.put("/data",(req,res)=>
+app.put("/data",(req,res)=> // reetreive all tweets 
 {
-  pool.query("SELECT tweet,tweet_author,tweet_id FROM tweets WHERE tweet_author = $1",[req.body.user],(err,ressult)=>
+  pool.query("SELECT tweet_body,tweet_author,tweet_id FROM tweets WHERE tweet_author = $1",[req.body.user],(err,ressult)=>
   {
     if(err)
     { 
@@ -227,12 +225,12 @@ app.put("/data",(req,res)=>
   })
 })
 
-app.post("/getHome",(req,res)=>
+app.post("/getHome",(req,res)=> // get to home 
 {
   res.redirect(directory+'./main.html')
 })
 
-app.post("/delete",(req,res)=>
+app.post("/delete",(req,res)=> // delete selected tweet
 {
   let data = 
   {
@@ -251,7 +249,7 @@ app.post("/delete",(req,res)=>
 })
 
 
-app.get("/logout",(req,res,next)=>
+app.get("/logout",(req,res,next)=> // logout
 {
   res.status(200).send("/")
 })
