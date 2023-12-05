@@ -97,7 +97,7 @@ function footer(){
     back.setAttribute('class','footer--div');
     back.textContent = "Portfolio"
     footerP.innerHTML=`
-    This project is made by <a class="footer--link" href="https://mosalah001.netlify.app">Mohamed Salah Eldin</a> ,
+    This project is made by <a class="footer--link" href="https://devmosalah.com">Mohamed Salah Eldin</a> ,
     ${new Date().getFullYear()}©.
     `
     footer.appendChild(footerP);
