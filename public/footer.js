@@ -109,7 +109,7 @@ function footer(){
     back.addEventListener('click',goToPortfolio);
 
     function goToPortfolio(){
-        window.location = "https://mosalah001.netlify.app";
+        window.location = "https://devmosalah.com";
     }
 }
 footer();
