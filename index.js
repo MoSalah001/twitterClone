@@ -1,11 +1,11 @@
 const myEnv = require('dotenv')
-/*** only for developement purpose to get secret credintals from env files in a local environment 
+//*** only for developement purpose to get secret credintals from env files in a local environment 
 const envo = myEnv.config()
 if (envo.error){
   throw envo.error
 }
 
-****/
+//****/
 
 
 const express = require('express');
@@ -24,16 +24,21 @@ var serverPort = process.env.PORT || 3000
 
 let directory ="../"
 
-const pool = new Pool
-(
-  {
-  host: process.env.DB_HOST ,
-  user: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port:process.env.DB_PORT
-  }
-);
+// const pool = new Pool
+// (
+//   {
+//   host: process.env.DB_HOST ,
+//   user: process.env.DB_USER,
+//   database: process.env.DB_NAME,
+//   password: process.env.DB_PASSWORD,
+//   port:process.env.DB_PORT,
+//   sslmode: 'require'
+//   }
+// );
+const connectionString = process.env.connectionString
+const pool = new Pool ({
+  connectionString,
+})
 
 const app = express();
 
@@ -41,12 +46,13 @@ app.engine('html',require('ejs').renderFile)
 
 app.use(express.static('./public'))
 
-// const cors = require('cors');   //only for developement purpose
-// app.use(cors());                //only for developement purpose
+const cors = require('cors');   //only for developement purpose
+app.use(cors());                //only for developement purpose
 
 app.listen(serverPort,serverHost,function()
 {
   console.log(`listening on http://${serverHost}:${serverPort}`);
+  pool.connect();
 });
 
 app.use(express.json());
@@ -59,7 +65,6 @@ app.get('/',(req,res)=>
 app.post('/feed',(req,res)=> // get user tweets on login 
 {
   let uname = req.body.user;
-  pool.connect();
   pool.query('SELECT * FROM tweets WHERE tweet_author = $1',[uname],(err,result)=>
   {
     if(err) 
@@ -100,7 +105,6 @@ app.post('/mew',(req,res)=> // post a new tweet
 {
   let tweet = req.body.body
   let user = req.body.user
-  pool.connect()
   pool.query("SELECT uname , un_id FROM users WHERE uname = $1",[user],(err, result)=>
   {
    var userName = result.rows[0].uname;
@@ -181,7 +185,6 @@ app.post('/reg',(req,res)=> // register a new user
       }
       else 
       {
-        pool.connect()
         pool.query('INSERT INTO users(uname,pass,email,joinDate) VALUES ($1, $2, $3, $4) RETURNING *',[uname, hash, mail,Date()],(err, result)=> 
         {
           if (err) 
