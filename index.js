@@ -65,6 +65,7 @@ app.get('/',(req,res)=>
 app.post('/feed',(req,res)=> // get user tweets on login 
 {
   let uname = req.body.user;
+  pool.connect();
   pool.query('SELECT * FROM tweets WHERE tweet_author = $1',[uname],(err,result)=>
   {
     if(err) 
@@ -105,6 +106,7 @@ app.post('/mew',(req,res)=> // post a new tweet
 {
   let tweet = req.body.body
   let user = req.body.user
+  pool.connect();
   pool.query("SELECT uname , un_id FROM users WHERE uname = $1",[user],(err, result)=>
   {
    var userName = result.rows[0].uname;
@@ -130,7 +132,7 @@ app.post("/login",(req,res)=> // getting typed username and password for auth fr
 {
   let uname = req.body.uname;
   let password = req.body.pass.toString()
-
+  pool.connect();
       pool.query('SELECT pass,uname FROM users WHERE uname = $1',[uname],(err, result)=> 
       {
         if (err) 
