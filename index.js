@@ -107,10 +107,12 @@ app.post('/mew',(req,res)=> // post a new tweet
   let tweet = req.body.body
   let user = req.body.user
   pool.connect();
-  pool.query("SELECT uname , un_id FROM users WHERE uname = $1",[user],(err, result)=>
+  // pool.query("SELECT uname , un_id FROM users WHERE uname = $1",[user],(err, result)=>
+  pool.query("SELECT * FROM users",(err, result)=>
   {
    var userName = result.rows[0].uname;
-    pool.query("INSERT INTO tweets(tweet_body,tweet_author,tweettime) VALUES($1, $2, $3) RETURNING *",[tweet, userName,Date()],(err, result)=>
+   let date = new Date().toISOString()
+    pool.query("INSERT INTO tweets(tweet_body,tweet_author,tweettime) VALUES($1, $2, $3) RETURNING *",[tweet, userName,date],(err, result)=>
     {
       if(err) 
       {

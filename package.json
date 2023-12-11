@@ -20,7 +20,7 @@
     "nodemon": "^2.0.20"
   },
   "scripts": {
-    "test": "nodemon ./index.js",
+    "dev": "nodemon ./index.js",
     "start": "node ./index.js"
   }
 }
